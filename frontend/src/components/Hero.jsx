@@ -29,10 +29,10 @@ const Hero = ({ heroData }) => {
   return (
     <section 
       ref={containerRef}
-      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-500 z-10 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#FFF5F7]'}`}
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-500 z-10 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'}`}
     >
       {/* Premium Animated Gradient Mesh Background */}
-      <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#FFF5F7]'}`}>
+      <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'}`}>
         {/* Dark Mode Background Elements */}
         <div className={`absolute inset-0 bg-[#020617] transition-opacity duration-700 ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}>
           {/* Animated Gradient Mesh Blobs */}
@@ -97,9 +97,9 @@ const Hero = ({ heroData }) => {
         </div>
 
         {/* Light Mode Background Elements */}
-        <div className={`absolute inset-0 bg-[#FFF5F7] transition-opacity duration-700 ${theme === 'dark' ? 'opacity-0' : 'opacity-100'}`}>
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FFEBF0] blur-[120px] rounded-full"></div>
-          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#FFEBF0] blur-[120px] rounded-full"></div>
+        <div className={`absolute inset-0 bg-[#F0F9FF] transition-opacity duration-700 ${theme === 'dark' ? 'opacity-0' : 'opacity-100'}`}>
+          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#E0F2FE] blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#E0F2FE] blur-[120px] rounded-full"></div>
         </div>
         
         {/* Subtle noise texture for premium feel */}

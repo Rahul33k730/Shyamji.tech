@@ -10,7 +10,7 @@
 
 @layer base {
   body {
-    @apply bg-[#FFF5F7] dark:bg-[#020617] text-slate-600 dark:text-slate-400 font-sans antialiased selection:bg-cyan-500/30 transition-colors duration-500;
+    @apply bg-[#F0F9FF] dark:bg-[#020617] text-slate-600 dark:text-slate-400 font-sans antialiased selection:bg-cyan-500/30 transition-colors duration-500;
   }
 
   h1 { @apply text-5xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors duration-500; }
