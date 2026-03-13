@@ -12,7 +12,10 @@ import Footer from '../components/Footer';
 
 import API_BASE_URL from '../config/api';
 
+import { useTheme } from '../context/ThemeContext';
+
 const Home = () => {
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
     hero: null,
@@ -108,21 +111,21 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-[#020617] min-h-screen selection:bg-cyan-500/30 transition-colors duration-500">
+    <div className={`${theme === 'dark' ? 'bg-[#020617]' : 'bg-white'} min-h-screen selection:bg-cyan-500/30 transition-colors duration-500`}>
       <Navbar />
       <main>
         <Hero heroData={data.hero} />
         <ServicesMarquee services={data.services} />
-        <section className="bg-white dark:bg-[#020617] transition-colors duration-500">
+        <section className={`${theme === 'dark' ? 'bg-[#020617]' : 'bg-white'} transition-colors duration-500`}>
           <Services services={data.services} />
         </section>
-        <section className="bg-slate-50 dark:bg-[#030a21] transition-colors duration-500">
+        <section className={`${theme === 'dark' ? 'bg-[#030a21]' : 'bg-slate-50'} transition-colors duration-500`}>
           <Products products={data.products} />
         </section>
-        <section className="bg-white dark:bg-[#020617] transition-colors duration-500">
+        <section className={`${theme === 'dark' ? 'bg-[#020617]' : 'bg-white'} transition-colors duration-500`}>
           <PortfolioGrid portfolio={data.portfolio} />
         </section>
-        <section className="bg-slate-50 dark:bg-[#030a21] transition-colors duration-500">
+        <section className={`${theme === 'dark' ? 'bg-[#030a21]' : 'bg-slate-50'} transition-colors duration-500`}>
           <ContactSection />
         </section>
       </main>

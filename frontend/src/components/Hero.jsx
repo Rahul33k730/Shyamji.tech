@@ -29,12 +29,12 @@ const Hero = ({ heroData }) => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-[#020617] transition-colors duration-500 z-10"
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-500 z-10 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-white'}`}
     >
       {/* Premium Animated Gradient Mesh Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500">
+      <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-slate-50'}`}>
         {/* Dark Mode Background Elements */}
-        <div className="absolute inset-0 bg-[#020617] opacity-0 dark:opacity-100 transition-opacity duration-700">
+        <div className={`absolute inset-0 bg-[#020617] transition-opacity duration-700 ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}>
           {/* Animated Gradient Mesh Blobs */}
           <motion.div
             animate={{
@@ -97,13 +97,13 @@ const Hero = ({ heroData }) => {
         </div>
 
         {/* Light Mode Background Elements */}
-        <div className="absolute inset-0 bg-slate-50 opacity-100 dark:opacity-0 transition-opacity duration-700">
+        <div className={`absolute inset-0 bg-slate-50 transition-opacity duration-700 ${theme === 'dark' ? 'opacity-0' : 'opacity-100'}`}>
           <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-100/50 blur-[120px] rounded-full"></div>
           <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-100/50 blur-[120px] rounded-full"></div>
         </div>
         
         {/* Subtle noise texture for premium feel */}
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] mix-blend-overlay pointer-events-none" 
+        <div className={`absolute inset-0 mix-blend-overlay pointer-events-none transition-opacity duration-500 ${theme === 'dark' ? 'opacity-[0.05]' : 'opacity-[0.03]'}`} 
              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
         </div>
       </div>
