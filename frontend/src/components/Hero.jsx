@@ -29,12 +29,12 @@ const Hero = ({ heroData }) => {
   return (
     <section 
       ref={containerRef}
-      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-500 z-10 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'}`}
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-500 z-10 ${theme === 'dark' ? 'bg-[#000000]' : 'bg-[#F0F9FF]'}`}
     >
       {/* Premium Animated Gradient Mesh Background */}
-      <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500 ${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'}`}>
+      <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500 ${theme === 'dark' ? 'bg-[#000000]' : 'bg-[#F0F9FF]'}`}>
         {/* Dark Mode Background Elements */}
-        <div className={`absolute inset-0 bg-[#020617] transition-opacity duration-700 ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute inset-0 bg-[#000000] transition-opacity duration-700 ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}>
           {/* Animated Gradient Mesh Blobs */}
           <motion.div
             animate={{
@@ -90,10 +90,10 @@ const Hero = ({ heroData }) => {
           />
           
           {/* Dark Overlay for Readability */}
-          <div className="absolute inset-0 bg-[#020617]/40"></div>
+          <div className="absolute inset-0 bg-[#000000]/40"></div>
           
           {/* Vignette effect */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-[#020617]/80 opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 via-transparent to-[#000000]/80 opacity-50"></div>
         </div>
 
         {/* Light Mode Background Elements */}

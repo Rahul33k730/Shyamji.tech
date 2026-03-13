@@ -31,7 +31,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
       isScrolled 
         ? theme === 'dark' 
-          ? 'py-4 bg-[#020617]/90 backdrop-blur-xl border-b border-white/5 shadow-2xl' 
+          ? 'py-4 bg-[#000000]/90 backdrop-blur-xl border-b border-white/5 shadow-2xl' 
           : 'py-4 bg-[#F0F9FF]/90 backdrop-blur-xl border-b border-[#E0F2FE] shadow-2xl'
         : 'py-6 bg-transparent'
     }`}>

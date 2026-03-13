@@ -19,7 +19,7 @@ const ServicesMarquee = ({ services }) => {
 
   return (
     <div className={`border-y py-6 overflow-hidden relative transition-colors duration-500 ${
-      theme === 'dark' ? 'bg-[#030a21] border-white/5' : 'bg-[#E0F2FE] border-[#E0F2FE]'
+      theme === 'dark' ? 'bg-[#050505] border-white/5' : 'bg-[#E0F2FE] border-[#E0F2FE]'
     }`}>
       <style>{`
         @keyframes marquee {

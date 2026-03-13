@@ -111,21 +111,21 @@ const Home = () => {
   }
 
   return (
-    <div className={`${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'} min-h-screen selection:bg-cyan-500/30 transition-colors duration-500`}>
+    <div className={`${theme === 'dark' ? 'bg-[#000000]' : 'bg-[#F0F9FF]'} min-h-screen selection:bg-cyan-500/30 transition-colors duration-500`}>
       <Navbar />
       <main>
         <Hero heroData={data.hero} />
         <ServicesMarquee services={data.services} />
-        <section className={`${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'} transition-colors duration-500`}>
+        <section className={`${theme === 'dark' ? 'bg-[#000000]' : 'bg-[#F0F9FF]'} transition-colors duration-500`}>
           <Services services={data.services} />
         </section>
-        <section className={`${theme === 'dark' ? 'bg-[#030a21]' : 'bg-[#E0F2FE]'} transition-colors duration-500`}>
+        <section className={`${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#E0F2FE]'} transition-colors duration-500`}>
           <Products products={data.products} />
         </section>
-        <section className={`${theme === 'dark' ? 'bg-[#020617]' : 'bg-[#F0F9FF]'} transition-colors duration-500`}>
+        <section className={`${theme === 'dark' ? 'bg-[#000000]' : 'bg-[#F0F9FF]'} transition-colors duration-500`}>
           <PortfolioGrid portfolio={data.portfolio} />
         </section>
-        <section className={`${theme === 'dark' ? 'bg-[#030a21]' : 'bg-[#E0F2FE]'} transition-colors duration-500`}>
+        <section className={`${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#E0F2FE]'} transition-colors duration-500`}>
           <ContactSection />
         </section>
       </main>

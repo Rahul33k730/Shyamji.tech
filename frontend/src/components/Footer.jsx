@@ -31,7 +31,7 @@ const Footer = () => {
 
   return (
     <footer className={`border-t pt-20 pb-10 transition-colors duration-500 ${
-      theme === 'dark' ? 'bg-[#020617] border-white/5' : 'bg-[#F0F9FF] border-[#E0F2FE]'
+      theme === 'dark' ? 'bg-[#000000] border-white/5' : 'bg-[#F0F9FF] border-[#E0F2FE]'
     }`}>
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
