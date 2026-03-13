@@ -32,7 +32,7 @@ const Navbar = () => {
       isScrolled 
         ? theme === 'dark' 
           ? 'py-4 bg-[#020617]/90 backdrop-blur-xl border-b border-white/5 shadow-2xl' 
-          : 'py-4 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-2xl'
+          : 'py-4 bg-[#FFF5F7]/90 backdrop-blur-xl border-b border-[#FFEBF0] shadow-2xl'
         : 'py-6 bg-transparent'
     }`}>
       <div className="container-custom flex justify-between items-center">
