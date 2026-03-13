@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const ServicesMarquee = ({ services }) => {
+  const { theme } = useTheme();
   const marqueeServices = services?.filter(s => s.showInMarquee) || [
     'AI Chatbot for Sales',
     'AI Appointment Scheduler',
@@ -16,7 +18,9 @@ const ServicesMarquee = ({ services }) => {
   const marqueeContent = [...marqueeServices, ...marqueeServices]; // Duplicate for seamless loop
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 py-6 overflow-hidden relative transition-colors">
+    <div className={`border-y py-6 overflow-hidden relative transition-colors duration-500 ${
+      theme === 'dark' ? 'bg-slate-900 border-white/5' : 'bg-slate-50 border-slate-200'
+    }`}>
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }

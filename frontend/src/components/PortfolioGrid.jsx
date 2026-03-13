@@ -31,7 +31,7 @@ const PortfolioCard = ({ project, index }) => {
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="mb-4">
-          <h3 className="mb-2 group-hover:text-cyan-500 transition-colors">
+          <h3 className="mb-2 text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">
             {project.projectName}
           </h3>
           <p className="line-clamp-3 text-sm text-slate-600 dark:text-slate-400">

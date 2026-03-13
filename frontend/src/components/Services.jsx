@@ -34,19 +34,19 @@ const ServiceCard = ({ service, index }) => {
       </div>
 
       <div>
-        <h3 className="mb-2 group-hover:text-cyan-500 transition-colors">
+        <h3 className="mb-2 text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">
           {service.name}
         </h3>
-        <p className="text-sm">
+        <p className="text-sm text-slate-600 dark:text-slate-400 transition-colors">
           {service.description}
         </p>
       </div>
 
-      <div className="mt-auto pt-6 border-t border-white/5 flex items-end justify-between">
+      <div className="mt-auto pt-6 border-t border-slate-200 dark:border-white/5 flex items-end justify-between transition-colors">
         <div>
           <p className="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Starting at</p>
-          <p className="text-2xl font-bold text-white">
-            <span className="text-cyan-500 mr-1">{symbol}</span>
+          <p className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
+            <span className="text-cyan-600 dark:text-cyan-500 mr-1">{symbol}</span>
             {price.toLocaleString()}
           </p>
         </div>

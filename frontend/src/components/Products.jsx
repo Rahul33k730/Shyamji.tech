@@ -30,7 +30,7 @@ const ProductCard = ({ product, index }) => {
             </div>
 
             <div>
-              <h2 className="mb-4 group-hover:text-cyan-400 transition-colors">
+              <h2 className="mb-4 text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                 {product.name}
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400">
