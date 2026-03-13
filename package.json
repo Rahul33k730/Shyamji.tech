@@ -4,9 +4,8 @@
   "description": "Full-stack startup website",
   "scripts": {
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm run build",
+    "build": "npm install && cd backend && npm install && npx prisma generate && cd ../frontend && npm install && npm run build",
     "start": "cd backend && node src/index.js",
-    "render-build": "npm install && cd backend && npm install && npx prisma generate && cd ../frontend && npm install && npm run build",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
     "prisma:push": "cd backend && npx prisma db push",
     "prisma:seed": "cd backend && node prisma/seed.js"
