@@ -13,6 +13,7 @@ import Footer from '../components/Footer';
 import API_BASE_URL from '../config/api';
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
     hero: null,
     services: [],
@@ -23,13 +24,30 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('Fetching data from:', API_BASE_URL);
       try {
+        setLoading(true);
         // Individual fetches to prevent one failure from blocking others
-        const fetchHero = axios.get(`${API_BASE_URL}/hero`).catch(() => ({ data: null }));
-        const fetchServices = axios.get(`${API_BASE_URL}/services`).catch(() => ({ data: [] }));
-        const fetchProducts = axios.get(`${API_BASE_URL}/products`).catch(() => ({ data: [] }));
-        const fetchPortfolio = axios.get(`${API_BASE_URL}/portfolio`).catch(() => ({ data: [] }));
-        const fetchLogo = axios.get(`${API_BASE_URL}/logo`).catch(() => ({ data: null }));
+        const fetchHero = axios.get(`${API_BASE_URL}/hero`).catch(err => {
+          console.error('Hero fetch failed:', err.message);
+          return { data: null };
+        });
+        const fetchServices = axios.get(`${API_BASE_URL}/services`).catch(err => {
+          console.error('Services fetch failed:', err.message);
+          return { data: [] };
+        });
+        const fetchProducts = axios.get(`${API_BASE_URL}/products`).catch(err => {
+          console.error('Products fetch failed:', err.message);
+          return { data: [] };
+        });
+        const fetchPortfolio = axios.get(`${API_BASE_URL}/portfolio`).catch(err => {
+          console.error('Portfolio fetch failed:', err.message);
+          return { data: [] };
+        });
+        const fetchLogo = axios.get(`${API_BASE_URL}/logo`).catch(err => {
+          console.error('Logo fetch failed:', err.message);
+          return { data: null };
+        });
 
         const [heroRes, servicesRes, productsRes, portfolioRes, logoRes] = await Promise.all([
           fetchHero,
@@ -38,6 +56,8 @@ const Home = () => {
           fetchPortfolio,
           fetchLogo
         ]);
+
+        console.log('Data fetched successfully');
 
         setData({
           hero: heroRes.data,
@@ -61,22 +81,50 @@ const Home = () => {
         }
       } catch (err) {
         console.error('Error in fetchData:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
+
+    // Safety timeout to ensure loading screen doesn't stay forever
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
+  if (loading) {
+    return (
+      <div className="bg-white dark:bg-slate-950 min-h-screen flex items-center justify-center transition-colors duration-500">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-slate-400 font-medium animate-pulse uppercase tracking-widest text-[10px]">Loading Experience...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white dark:bg-slate-950 min-h-screen selection:bg-cyan-500/30 transition-colors duration-300">
+    <div className="bg-white dark:bg-[#020617] min-h-screen selection:bg-cyan-500/30 transition-colors duration-500">
       <Navbar />
       <main>
         <Hero heroData={data.hero} />
         <ServicesMarquee services={data.services} />
-        <Services services={data.services} />
-        <Products products={data.products} />
-        <PortfolioGrid portfolio={data.portfolio} />
-        <ContactSection />
+        <section className="bg-white dark:bg-[#020617] transition-colors duration-500">
+          <Services services={data.services} />
+        </section>
+        <section className="bg-slate-50 dark:bg-[#030a21] transition-colors duration-500">
+          <Products products={data.products} />
+        </section>
+        <section className="bg-white dark:bg-[#020617] transition-colors duration-500">
+          <PortfolioGrid portfolio={data.portfolio} />
+        </section>
+        <section className="bg-slate-50 dark:bg-[#030a21] transition-colors duration-500">
+          <ContactSection />
+        </section>
       </main>
       <Chatbot />
       <Footer />

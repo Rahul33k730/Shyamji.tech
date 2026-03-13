@@ -14,8 +14,9 @@ const ContactSection = () => {
   });
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const services = [
+  const servicesList = [
     "AI Development",
     "Web & Mobile Apps",
     "Automation Solutions",
@@ -31,6 +32,7 @@ const ContactSection = () => {
 
     try {
       await axios.post(`${API_BASE_URL}/contact`, formData);
+      setSubmitted(true);
       setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' });
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
     } catch (err) {
@@ -41,7 +43,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
+    <section id="contact" className="section-padding relative overflow-hidden transition-colors duration-500">
       {/* Decorative Blur */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[150px] pointer-events-none" />
       

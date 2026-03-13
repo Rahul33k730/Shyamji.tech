@@ -86,7 +86,7 @@ const Products = ({ products }) => {
   const data = products && products.length > 0 ? products : defaultProducts;
 
   return (
-    <section id="products" className="section-padding bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
+    <section id="products" className="section-padding relative overflow-hidden transition-colors duration-500">
       {/* Decorative Orbs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/5 blur-[150px] pointer-events-none" />
 

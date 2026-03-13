@@ -5,18 +5,18 @@
   --color-cyan-500: #06b6d4;
   --color-cyan-400: #22d3ee;
   --color-slate-900: #0f172a;
-  --color-slate-950: #0A192F;
+  --color-slate-950: #020617;
 }
 
 @layer base {
   body {
-    @apply bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-sans antialiased selection:bg-cyan-500/30 transition-colors duration-500;
+    @apply bg-white dark:bg-[#020617] text-slate-600 dark:text-slate-400 font-sans antialiased selection:bg-cyan-500/30 transition-colors duration-500;
   }
 
-  h1 { @apply text-5xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight; }
-  h2 { @apply text-4xl font-semibold text-slate-900 dark:text-white tracking-tight; }
-  h3 { @apply text-2xl font-semibold text-slate-900 dark:text-white tracking-tight; }
-  p { @apply text-base text-slate-600 dark:text-slate-400 leading-relaxed; }
+  h1 { @apply text-5xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors duration-500; }
+  h2 { @apply text-4xl font-semibold text-slate-900 dark:text-white tracking-tight transition-colors duration-500; }
+  h3 { @apply text-2xl font-semibold text-slate-900 dark:text-white tracking-tight transition-colors duration-500; }
+  p { @apply text-base text-slate-600 dark:text-slate-400 leading-relaxed transition-colors duration-500; }
 }
 
 @layer components {

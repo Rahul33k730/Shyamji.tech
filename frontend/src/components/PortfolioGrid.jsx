@@ -89,10 +89,7 @@ const PortfolioGrid = ({ portfolio }) => {
   const data = portfolio && portfolio.length > 0 ? portfolio : defaultPortfolio;
 
   return (
-    <section id="portfolio" className="section-padding bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] pointer-events-none" />
-      
+    <section id="portfolio" className="section-padding relative transition-colors duration-500">
       <div className="container-custom">
         <div className="max-w-2xl mb-20">
           <motion.div

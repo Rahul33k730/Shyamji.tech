@@ -26,11 +26,13 @@ class ErrorBoundary extends React.Component {
           >
             Refresh Page
           </button>
-          {process.env.NODE_ENV === 'development' && (
-            <pre className="mt-8 p-4 bg-slate-900 border border-red-500/30 text-red-400 text-xs text-left overflow-auto max-w-full rounded-xl">
+          <div className="mt-8 w-full max-w-2xl">
+            <p className="text-red-500 font-bold text-sm mb-2">Technical Details:</p>
+            <pre className="p-4 bg-slate-900 border border-red-500/30 text-red-400 text-xs text-left overflow-auto max-w-full rounded-xl">
               {this.state.error?.toString()}
+              {this.state.error?.stack}
             </pre>
-          )}
+          </div>
         </div>
       );
     }

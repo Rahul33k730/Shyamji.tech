@@ -74,7 +74,7 @@ const Services = ({ services }) => {
   const data = services && services.length > 0 ? services : defaultServices;
 
   return (
-    <section id="services" className="section-padding bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section id="services" className="section-padding transition-colors duration-500">
       <div className="container-custom">
         <div className="max-w-3xl mb-16">
           <motion.div

@@ -7,7 +7,12 @@ const Hero = ({ heroData }) => {
   const { theme } = useTheme();
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scrollOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    return scrollOpacity.onChange(v => setOpacity(v));
+  }, [scrollOpacity]);
 
   const [taglineIndex, setTaglineIndex] = useState(0);
   const taglines = typeof heroData?.floatingTaglines === 'string' 
@@ -24,11 +29,12 @@ const Hero = ({ heroData }) => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500 z-10"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-[#020617] transition-colors duration-500 z-10"
     >
-      {/* Premium Animated Gradient Mesh Background - Only visible in Dark Mode */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
-        <div className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-700">
+      {/* Premium Animated Gradient Mesh Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500">
+        {/* Dark Mode Background Elements */}
+        <div className="absolute inset-0 bg-[#020617] opacity-0 dark:opacity-100 transition-opacity duration-700">
           {/* Animated Gradient Mesh Blobs */}
           <motion.div
             animate={{
@@ -84,14 +90,14 @@ const Hero = ({ heroData }) => {
           />
           
           {/* Dark Overlay for Readability */}
-          <div className="absolute inset-0 bg-slate-950/60"></div>
+          <div className="absolute inset-0 bg-[#020617]/40"></div>
           
           {/* Vignette effect */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950 opacity-80"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-[#020617]/80 opacity-50"></div>
         </div>
 
-        {/* Light Mode Subtle Accents */}
-        <div className="absolute inset-0 opacity-100 dark:opacity-0 transition-opacity duration-700">
+        {/* Light Mode Background Elements */}
+        <div className="absolute inset-0 bg-slate-50 opacity-100 dark:opacity-0 transition-opacity duration-700">
           <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-100/50 blur-[120px] rounded-full"></div>
           <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-100/50 blur-[120px] rounded-full"></div>
         </div>
