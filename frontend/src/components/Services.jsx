@@ -27,30 +27,30 @@ const ServiceCard = ({ service, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="glass-card glass-card-hover p-8 flex flex-col h-full gap-6 group"
+      className="card-premium h-full flex flex-col group"
     >
-      <div className="w-12 h-12 glass-card flex items-center justify-center text-cyan-500 group-hover:scale-110 transition-transform">
-        <IconComponent size={24} />
+      <div className="w-16 h-16 bg-primary-blue/5 dark:bg-secondary-blue/10 border border-primary-blue/10 dark:border-secondary-blue/20 rounded-2xl flex items-center justify-center text-primary-blue dark:text-secondary-blue mb-8 group-hover:scale-110 transition-transform duration-500">
+        <IconComponent size={32} />
       </div>
 
       <div>
-        <h3 className="mb-2 text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">
+        <h3 className="mb-2 text-navy-900 dark:text-white group-hover:text-primary-blue dark:group-hover:text-secondary-blue transition-colors">
           {service.name}
         </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 transition-colors">
+        <p className="text-sm text-slate-blue dark:text-slate-400 transition-colors">
           {service.description}
         </p>
       </div>
 
-      <div className="mt-auto pt-6 border-t border-slate-200 dark:border-white/5 flex items-end justify-between transition-colors">
+      <div className="mt-auto pt-6 border-t border-bg-secondary dark:border-white/5 flex items-end justify-between transition-colors">
         <div>
-          <p className="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Starting at</p>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white transition-colors">
-            <span className="text-cyan-600 dark:text-cyan-500 mr-1">{symbol}</span>
+          <p className="text-[10px] text-slate-blue/60 uppercase font-bold tracking-widest mb-1">Starting at</p>
+          <p className="text-2xl font-bold text-navy-900 dark:text-white transition-colors">
+            <span className="text-primary-blue dark:text-secondary-blue mr-1">{symbol}</span>
             {price.toLocaleString()}
           </p>
         </div>
-        <button className="flex items-center gap-2 text-sm font-semibold text-cyan-500 hover:text-cyan-400 group/btn transition-colors">
+        <button className="flex items-center gap-2 text-sm font-semibold text-primary-blue hover:text-secondary-blue group/btn transition-colors">
           Learn More
           <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
         </button>
@@ -81,15 +81,15 @@ const Services = ({ services }) => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 text-cyan-500 font-bold tracking-widest uppercase text-xs mb-4"
+            className="flex items-center gap-3 text-primary-blue font-bold tracking-widest uppercase text-xs mb-4"
           >
-            <div className="w-8 h-[2px] bg-cyan-500" />
+            <div className="w-8 h-[2px] bg-primary-blue" />
             Our Expertise
           </motion.div>
           <h2 className="mb-6">
-            High-End <span className="text-cyan-500">AI & Tech</span> <br /> Solutions for Innovators.
+            High-End <span className="text-primary-blue">AI & Tech</span> <br /> Solutions for Innovators.
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
+          <p className="text-lg text-slate-blue dark:text-slate-400">
             We help you turn complex ideas into functional, affordable, and high-performance products using the latest in Artificial Intelligence and Web technologies.
           </p>
         </div>

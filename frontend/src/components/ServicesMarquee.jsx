@@ -19,7 +19,7 @@ const ServicesMarquee = ({ services }) => {
 
   return (
     <div className={`border-y py-6 overflow-hidden relative transition-colors duration-500 ${
-      theme === 'dark' ? 'bg-[#050505] border-white/5' : 'bg-[#E0F2FE] border-[#E0F2FE]'
+      theme === 'dark' ? 'bg-[#050505] border-white/5' : 'bg-bg-secondary border-bg-secondary'
     }`}>
       <style>{`
         @keyframes marquee {
@@ -33,8 +33,8 @@ const ServicesMarquee = ({ services }) => {
       <div className="flex items-center gap-12 whitespace-nowrap animate-marquee-custom">
         {marqueeContent.map((service, index) => (
           <div key={index} className="flex items-center gap-4 group">
-            <div className="w-2 h-2 bg-cyan-500 rounded-full group-hover:scale-150 transition-transform" />
-            <span className="text-xl font-bold tracking-tight text-slate-400 dark:text-slate-400 group-hover:text-cyan-500 transition-colors uppercase italic">
+            <div className="w-2 h-2 bg-primary-blue rounded-full group-hover:scale-150 transition-transform" />
+            <span className="text-xl font-bold tracking-tight text-slate-blue/40 dark:text-slate-400 group-hover:text-primary-blue transition-colors uppercase italic">
               {typeof service === 'string' ? service : service.name}
             </span>
           </div>

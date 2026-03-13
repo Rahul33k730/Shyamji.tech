@@ -12,11 +12,6 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// Routes
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Shyamji Tech API' });
-});
-
 // API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/hero', require('./routes/heroRoutes'));
@@ -35,6 +30,11 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../frontend', 'dist', 'index.html'));
+  });
+} else {
+  // Routes
+  app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to Shyamji Tech API' });
   });
 }
 

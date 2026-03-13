@@ -45,7 +45,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="section-padding relative overflow-hidden transition-colors duration-500">
       {/* Decorative Blur */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary-blue/5 blur-[150px] pointer-events-none" />
       
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -53,9 +53,9 @@ const ContactSection = () => {
           <div className="lg:col-span-5 flex flex-col gap-12">
             <div>
               <h2 className="mb-6 leading-tight">
-                Ready to Build <br /> Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Legendary?</span>
+                Ready to Build <br /> Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-secondary-blue">Legendary?</span>
               </h2>
-              <p className="max-w-md text-slate-600 dark:text-slate-400">
+              <p className="max-w-md text-slate-blue dark:text-slate-400">
                 We're always looking for new ideas and partners. Tell us about your project, and let's turn your vision into a reality.
               </p>
             </div>
@@ -67,12 +67,12 @@ const ContactSection = () => {
                 { icon: MapPin, label: 'Visit Us', value: 'Innovation Hub, Tech City, India' },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-5 group">
-                  <div className="w-12 h-12 glass-card flex items-center justify-center text-cyan-500 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 card-premium p-0 flex items-center justify-center text-primary-blue group-hover:scale-110 transition-transform">
                     <item.icon size={20} />
                   </div>
                   <div>
-                    <span className="block text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest mb-1">{item.label}</span>
-                    <p className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-cyan-400 transition-colors">{item.value}</p>
+                    <span className="block text-xs font-bold text-slate-blue/60 dark:text-slate-500 uppercase tracking-widest mb-1">{item.label}</span>
+                    <p className="text-lg font-semibold text-navy-900 dark:text-white group-hover:text-primary-blue transition-colors">{item.value}</p>
                   </div>
                 </div>
               ))}
@@ -81,18 +81,18 @@ const ContactSection = () => {
 
           {/* Right Side: Form */}
           <div className="lg:col-span-7">
-            <div className="glass-card p-8 md:p-10 shadow-2xl relative transition-colors duration-300">
+            <div className="card-premium p-8 md:p-10 shadow-2xl relative transition-colors duration-300">
               {submitted ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center"
                 >
-                  <div className="w-20 h-20 bg-cyan-500/10 rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle className="text-cyan-500" size={40} />
+                  <div className="w-20 h-20 bg-primary-blue/10 rounded-full flex items-center justify-center mb-6">
+                    <CheckCircle className="text-primary-blue" size={40} />
                   </div>
-                  <h3 className="mb-2">Message Sent!</h3>
-                  <p className="mb-8">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                  <h3 className="mb-2 text-navy-900 dark:text-white">Message Sent!</h3>
+                  <p className="mb-8 text-slate-blue dark:text-slate-400">Thank you for reaching out. We'll get back to you within 24 hours.</p>
                   <button onClick={() => setSubmitted(false)} className="btn-secondary">Send Another Message</button>
                 </motion.div>
               ) : (
@@ -142,8 +142,8 @@ const ContactSection = () => {
                         value={formData.service}
                         onChange={(e) => setFormData({...formData, service: e.target.value})}
                       >
-                        <option value="" className="bg-slate-900">Select a service</option>
-                        {servicesList.map(s => <option key={s} value={s} className="bg-slate-900">{s}</option>)}
+                        <option value="" className="bg-bg-primary dark:bg-navy-900">Select a service</option>
+                        {servicesList.map(s => <option key={s} value={s} className="bg-bg-primary dark:bg-navy-900">{s}</option>)}
                       </select>
                     </div>
                   </div>

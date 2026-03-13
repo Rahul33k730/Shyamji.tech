@@ -4,8 +4,8 @@ import { Video, HeartPulse, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const ProductCard = ({ product, index }) => {
   const icons = {
-    EditXpress: <Video className="w-12 h-12 text-cyan-500" />,
-    Telehealth: <HeartPulse className="w-12 h-12 text-cyan-500" />,
+    EditXpress: <Video className="w-12 h-12 text-primary-blue" />,
+    Telehealth: <HeartPulse className="w-12 h-12 text-primary-blue" />,
   };
 
   const defaultFeatures = [
@@ -15,55 +15,46 @@ const ProductCard = ({ product, index }) => {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="glass-card overflow-hidden group transition-colors duration-300"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-12">
-        <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-center">
-          <div className="flex flex-col gap-8">
-            <div className="w-16 h-16 glass-card flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-              {icons[product.name] || <Video className="w-8 h-8 text-cyan-500" />}
-            </div>
-
-            <div>
-              <h2 className="mb-4 text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                {product.name}
-              </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400">
-                {product.description}
-              </p>
-            </div>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {(product.features || defaultFeatures).map((feature, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-600 dark:text-slate-300">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-500 flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-
-            <button className="btn-primary w-fit px-8 py-4 flex items-center gap-2 text-lg">
-              Learn More
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        <div className="lg:col-span-5 relative h-[300px] lg:h-auto overflow-hidden bg-slate-100 dark:bg-slate-900">
-          <div className="absolute inset-0 bg-gradient-to-r from-white dark:from-slate-950 lg:from-white dark:lg:from-slate-950 to-transparent z-10" />
-          <img 
-            src={product.image || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop'} 
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-60 dark:opacity-40"
-          />
-        </div>
+    <div className="card-premium grid grid-cols-1 lg:grid-cols-2 gap-12 items-center group">
+      {/* Image Side */}
+      <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-primary-blue/10 dark:shadow-none">
+        <img 
+          src={product.image || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop'} 
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
-    </motion.div>
+
+      <div className="flex flex-col gap-8">
+        <div className="w-16 h-16 glass-card flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+          {icons[product.name] || <Video className="w-8 h-8 text-primary-blue" />}
+        </div>
+
+        <div>
+          <h2 className="mb-4 text-navy-900 dark:text-white group-hover:text-primary-blue dark:group-hover:text-secondary-blue transition-colors">
+            {product.name}
+          </h2>
+          <p className="text-lg text-slate-blue dark:text-slate-400">
+            {product.description}
+          </p>
+        </div>
+
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {(product.features || defaultFeatures).map((feature, i) => (
+            <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-blue dark:text-slate-300">
+              <CheckCircle2 className="w-5 h-5 text-primary-blue flex-shrink-0" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        <button className="btn-primary w-fit px-8 py-4 flex items-center gap-2 text-lg">
+          Learn More
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -88,7 +79,7 @@ const Products = ({ products }) => {
   return (
     <section id="products" className="section-padding relative overflow-hidden transition-colors duration-500">
       {/* Decorative Orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/5 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary-blue/5 blur-[150px] pointer-events-none" />
 
       <div className="container-custom">
         <div className="text-center mb-20 flex flex-col items-center">
@@ -96,14 +87,14 @@ const Products = ({ products }) => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-bold tracking-widest uppercase mb-6"
+            className="px-4 py-1.5 rounded-full border border-primary-blue/30 bg-primary-blue/10 text-primary-blue dark:text-secondary-blue text-xs font-bold tracking-widest uppercase mb-6"
           >
             Built for the Future
           </motion.div>
           <h2 className="max-w-4xl mb-6">
-            Premium <span className="text-cyan-500">Products</span> <br /> from Shyamji Tech.
+            Premium <span className="text-primary-blue">Products</span> <br /> from Shyamji Tech.
           </h2>
-          <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+          <p className="max-w-2xl text-lg text-slate-blue dark:text-slate-400">
             We don't just build for clients; we build for the future. Explore our own proprietary platforms that are changing the way people use technology.
           </p>
         </div>

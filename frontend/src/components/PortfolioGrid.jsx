@@ -4,44 +4,31 @@ import { ExternalLink, Star, Quote, ArrowRight } from 'lucide-react';
 
 const PortfolioCard = ({ project, index }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="glass-card glass-card-hover group flex flex-col h-full overflow-hidden transition-colors duration-300"
-    >
-      {/* Project Image */}
-      <div className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-900">
-        <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors z-10" />
+    <div className="card-premium flex flex-col h-full group p-0 overflow-hidden">
+      {/* Image Container */}
+      <div className="relative aspect-[16/10] overflow-hidden">
         <img 
-          src={project.mediaUrl || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop'} 
+          src={project.mediaUrl} 
           alt={project.projectName}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 dark:opacity-80"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute top-4 right-4 z-20 flex flex-wrap gap-2">
-          {(project.techStack || ['React', 'Tailwind']).slice(0, 2).map((tech, i) => (
-            <span key={i} className="px-2.5 py-1 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md text-[10px] font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest rounded-lg border border-slate-200 dark:border-white/10 shadow-sm">
-              {tech}
-            </span>
-          ))}
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-8 flex flex-col flex-grow">
         <div className="mb-4">
-          <h3 className="mb-2 text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">
+          <h3 className="mb-2 text-navy-900 dark:text-white group-hover:text-primary-blue dark:group-hover:text-secondary-blue transition-colors">
             {project.projectName}
           </h3>
-          <p className="line-clamp-3 text-sm text-slate-600 dark:text-slate-400">
+          <p className="line-clamp-3 text-sm text-slate-blue dark:text-slate-400">
             {project.description}
           </p>
         </div>
 
         {project.clientFeedback && (
-          <div className="p-4 bg-slate-100 dark:bg-white/5 rounded-xl border-l-2 border-cyan-500 flex flex-col gap-2 mb-6">
-            <p className="text-xs italic text-slate-600 dark:text-slate-300 line-clamp-2">
+          <div className="p-4 bg-bg-primary dark:bg-white/5 rounded-xl border-l-2 border-primary-blue flex flex-col gap-2 mb-6">
+            <p className="text-xs italic text-slate-blue dark:text-slate-300 line-clamp-2">
               "{project.clientFeedback}"
             </p>
             <div className="flex gap-0.5">
@@ -50,14 +37,14 @@ const PortfolioCard = ({ project, index }) => {
           </div>
         )}
 
-        <div className="mt-auto pt-4 border-t border-slate-200 dark:border-white/5">
-          <button className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors group/btn">
+        <div className="mt-auto pt-4 border-t border-bg-secondary dark:border-white/5">
+          <button className="flex items-center gap-2 text-sm font-semibold text-navy-900 dark:text-white hover:text-primary-blue dark:hover:text-secondary-blue transition-colors group/btn">
             View Case Study
             <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -96,15 +83,15 @@ const PortfolioGrid = ({ portfolio }) => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 text-cyan-500 font-bold tracking-widest uppercase text-xs mb-4"
+            className="flex items-center gap-3 text-primary-blue font-bold tracking-widest uppercase text-xs mb-4"
           >
-            <div className="w-8 h-[2px] bg-cyan-500" />
+            <div className="w-8 h-[2px] bg-primary-blue" />
             Our Portfolio
           </motion.div>
           <h2 className="mb-6">
-            A Glimpse of Our <span className="text-cyan-500">Masterpieces.</span>
+            A Glimpse of Our <span className="text-primary-blue">Masterpieces.</span>
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
+          <p className="text-lg text-slate-blue dark:text-slate-400">
             We've partnered with forward-thinking companies to build technology that doesn't just work—it inspires.
           </p>
         </div>
