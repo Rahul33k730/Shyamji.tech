@@ -24,74 +24,82 @@ const Hero = ({ heroData }) => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A192F] transition-colors duration-300 z-10"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500 z-10"
     >
-      {/* Premium Animated Gradient Mesh Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#020617]">
-        {/* Animated Gradient Mesh Blobs */}
-        <motion.div
-          animate={{
-            x: ['-20%', '10%', '-20%'],
-            y: ['-10%', '20%', '-10%'],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] rounded-full bg-blue-900/40 blur-[150px] mix-blend-screen"
-        />
-        <motion.div
-          animate={{
-            x: ['20%', '-10%', '20%'],
-            y: ['20%', '-10%', '20%'],
-            scale: [1.2, 1, 1.2],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 2
-          }}
-          className="absolute bottom-[-20%] right-[-10%] w-[80%] h-[80%] rounded-full bg-cyan-900/30 blur-[150px] mix-blend-screen"
-        />
-        <motion.div
-          animate={{
-            x: ['-10%', '20%', '-10%'],
-            y: ['30%', '10%', '30%'],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-[20%] left-[20%] w-[50%] h-[50%] rounded-full bg-[#00BFFF]/10 blur-[120px] mix-blend-screen"
-        />
-        <motion.div
-          animate={{
-            x: ['10%', '-20%', '10%'],
-            y: ['-20%', '10%', '-20%'],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 5
-          }}
-          className="absolute bottom-[20%] right-[20%] w-[50%] h-[50%] rounded-full bg-[#6FFFE9]/10 blur-[120px] mix-blend-screen"
-        />
-        
-        {/* Dark Overlay for Readability */}
-        <div className="absolute inset-0 bg-[#0A192F]/60"></div>
-        
-        {/* Subtle noise texture for premium feel */}
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      {/* Premium Animated Gradient Mesh Background - Only visible in Dark Mode */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
+        <div className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-700">
+          {/* Animated Gradient Mesh Blobs */}
+          <motion.div
+            animate={{
+              x: ['-20%', '10%', '-20%'],
+              y: ['-10%', '20%', '-10%'],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] rounded-full bg-blue-900/40 blur-[150px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{
+              x: ['20%', '-10%', '20%'],
+              y: ['20%', '-10%', '20%'],
+              scale: [1.2, 1, 1.2],
+            }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              ease: "linear",
+              delay: 2
+            }}
+            className="absolute bottom-[-20%] right-[-10%] w-[80%] h-[80%] rounded-full bg-cyan-900/30 blur-[150px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{
+              x: ['-10%', '20%', '-10%'],
+              y: ['30%', '10%', '30%'],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-[20%] left-[20%] w-[50%] h-[50%] rounded-full bg-[#00BFFF]/10 blur-[120px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{
+              x: ['10%', '-20%', '10%'],
+              y: ['-20%', '10%', '-20%'],
+            }}
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "linear",
+              delay: 5
+            }}
+            className="absolute bottom-[20%] right-[20%] w-[50%] h-[50%] rounded-full bg-[#6FFFE9]/10 blur-[120px] mix-blend-screen"
+          />
+          
+          {/* Dark Overlay for Readability */}
+          <div className="absolute inset-0 bg-slate-950/60"></div>
+          
+          {/* Vignette effect */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950 opacity-80"></div>
+        </div>
+
+        {/* Light Mode Subtle Accents */}
+        <div className="absolute inset-0 opacity-100 dark:opacity-0 transition-opacity duration-700">
+          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-100/50 blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-100/50 blur-[120px] rounded-full"></div>
         </div>
         
-        {/* Vignette effect */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-transparent to-[#0A192F] opacity-80"></div>
+        {/* Subtle noise texture for premium feel */}
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] mix-blend-overlay pointer-events-none" 
+             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+        </div>
       </div>
 
       {/* Hero Content */}
@@ -106,28 +114,28 @@ const Hero = ({ heroData }) => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
-            className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-sm font-semibold tracking-wider uppercase backdrop-blur-sm shadow-[0_0_15px_rgba(0,191,255,0.2)]"
+            className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-sm font-semibold tracking-wider uppercase backdrop-blur-sm shadow-[0_0_15px_rgba(0,191,255,0.1)] dark:shadow-[0_0_15px_rgba(0,191,255,0.2)]"
           >
             {taglines[taglineIndex]}
           </motion.div>
 
           {/* Mission Tagline */}
-          <h1 className="leading-[1.1] text-white">
+          <h1 className="leading-[1.1] text-slate-900 dark:text-white transition-colors duration-500">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="block mb-2 text-2xl md:text-3xl font-medium text-cyan-400 tracking-widest uppercase"
+              className="block mb-2 text-2xl md:text-3xl font-medium text-cyan-600 dark:text-cyan-400 tracking-widest uppercase"
             >
               Shyamji Tech
             </motion.span>
             Turning Great Ideas <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00BFFF] via-[#6FFFE9] to-blue-500 drop-shadow-[0_0_25px_rgba(0,191,255,0.3)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 dark:from-[#00BFFF] dark:via-[#6FFFE9] dark:to-blue-500 drop-shadow-[0_0_25px_rgba(0,191,255,0.1)] dark:drop-shadow-[0_0_25px_rgba(0,191,255,0.3)] transition-all duration-500">
               Into Reality.
             </span>
           </h1>
 
-          <p className="max-w-2xl mt-4 text-slate-300 font-light text-lg">
+          <p className="max-w-2xl mt-4 text-slate-600 dark:text-slate-300 font-light text-lg transition-colors duration-500">
             Shyamji Tech is a premium innovation hub helping people build their ideas into high-end products through affordable and accessible technology.
           </p>
 
