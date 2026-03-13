@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  role      String   @default("ADMIN") // SUPER_ADMIN or ADMIN
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Hero {
+  id              String   @id @default(uuid())
+  backgroundUrl   String   // Image or Video URL
+  backgroundType  String   // "IMAGE" or "VIDEO"
+  missionTagline  String
+  floatingTaglines String // Comma-separated: "Innovate, Automate, ..."
+  cta1Text        String
+  cta1Link        String
+  cta2Text        String
+  cta2Link        String
+  updatedAt       DateTime @updatedAt
+}
+
+model Service {
+  id            String   @id @default(uuid())
+  name          String
+  icon          String   // Icon name or URL
+  description   String
+  priceINR      Float
+  priceUSD      Float
+  order         Int      @default(0)
+  showInMarquee Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  image       String
+  description String
+  features    String // Comma-separated features
+  learnMore   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Portfolio {
+  id             String   @id @default(uuid())
+  projectName    String
+  description    String
+  mediaUrl       String   // Image or Video URL
+  mediaType      String   // "IMAGE" or "VIDEO"
+  techStack      String // Comma-separated tech stack
+  clientFeedback String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  service   String
+  message   String
+  status    String   @default("UNREAD") // UNREAD, READ, ARCHIVED
+  createdAt DateTime @default(now())
+}
+
+model ChatLog {
+  id        String   @id @default(uuid())
+  sessionId String
+  message   String
+  sender    String   // "USER" or "AI"
+  createdAt DateTime @default(now())
+}
+
+model FAQ {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Logo {
+  id           String   @id @default(uuid())
+  mainLogo     String
+  iconVersion  String
+  favicon      String
+  updatedAt    DateTime @updatedAt
+}
+
+model Newsletter {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

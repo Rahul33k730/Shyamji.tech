@@ -1,0 +1,16 @@
+{
+  "name": "shyamji-tech",
+  "version": "1.0.0",
+  "description": "Full-stack startup website",
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && node src/index.js",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "prisma:push": "cd backend && npx prisma db push",
+    "prisma:seed": "cd backend && node prisma/seed.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
