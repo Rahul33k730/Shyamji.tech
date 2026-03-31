@@ -1,0 +1,29 @@
+[33mcommit 1e62ff9af5da768b918aad0cee84b9193a208507[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Rahul33k730 <rahuldrrahulyadav@gmail.com>
+Date:   Thu Mar 26 16:56:38 2026 +0530
+
+    Deployment optimizations: renamed middleware to proxy and updated build scripts
+
+[33mcommit 53bf45bd053d816b4cf44b4aa1c810b0dcbc3e34[m
+Author: Rahul33k730 <rahuldrrahulyadav@gmail.com>
+Date:   Thu Mar 19 02:20:23 2026 +0530
+
+    Update schema to SQLite for local development and prepare for deployment
+
+[33mcommit a0ef34065c13066e10ff4858ba195be64299f05b[m
+Author: Rahul33k730 <rahuldrrahulyadav@gmail.com>
+Date:   Mon Mar 16 01:34:32 2026 +0530
+
+    Fix: Update schema to PostgreSQL, rename proxy to middleware for admin protection, and cleanup package.json
+
+[33mcommit 445a588d47a12ef97718680d4c4276b06a363c3c[m
+Author: Rahul33k730 <rahuldrrahulyadav@gmail.com>
+Date:   Sun Mar 15 14:35:12 2026 +0530
+
+    Fix: Add Node version to package.json to ensure Next.js build on Railway
+
+[33mcommit c91a0a796ac5b641a6e405baf964f63b080b84d6[m
+Author: Rahul33k730 <rahuldrrahulyadav@gmail.com>
+Date:   Sun Mar 15 13:08:13 2026 +0530
+
+    Fix: Update proxy matcher and start script for Railway deployment

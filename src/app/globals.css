@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-syne);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-primary: rgb(var(--text-primary));
+  --color-secondary: rgb(var(--text-secondary));
+  --color-muted: rgb(var(--text-muted));
+  --color-border: rgb(var(--border));
+  --color-card: rgb(var(--card));
+}
+
+:root {
+  --background: 255 255 255; /* #FFFFFF */
+  --foreground: 17 24 39; /* #111827 */
+  --card: 249 250 251; /* #f9fafb */
+  --card-surface: 243 244 246; /* #f3f4f6 */
+  --card-foreground: 17 24 39;
+  --surface-2: 243 244 246;
+  --accent-cyan: 26 184 255; /* #1ab8ff */
+  --accent-teal: 0 229 160; /* #00e5a0 */
+  --text-primary: 17 24 39; /* #111827 */
+  --text-secondary: 75 85 99; /* #4B5563 */
+  --text-muted: 107 114 128; /* #6B7280 */
+  --border: 17 24 39;
+  --glass-bg: 255 255 255;
+  --glass-border: 17 24 39;
+}
+
+.dark {
+  --background: 8 10 14; /* #080a0e */
+  --foreground: 255 255 255;
+  --card: 12 16 24; /* #0c1018 */
+  --card-surface: 17 22 32; /* #111620 */
+  --card-foreground: 255 255 255;
+  --surface-2: 17 22 32;
+  --text-primary: 255 255 255;
+  --text-secondary: 156 163 175; /* #9CA3AF */
+  --text-muted: 138 154 184; /* #8a9ab8 */
+  --border: 255 255 255;
+  --glass-bg: 12 16 24;
+  --glass-border: 255 255 255;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--border) / 0.08);
+  }
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--text-primary));
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.78;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  h1, h2, h3, h4, h5, h6, .badge, .stat-number {
+    font-family: var(--font-syne), system-ui, sans-serif;
+    color: rgb(var(--text-primary));
+    letter-spacing: -0.02em;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+  h2 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+.text-primary {
+  color: rgb(var(--text-primary));
+}
+
+.text-secondary {
+  color: rgb(var(--text-secondary));
+}
+
+.text-muted {
+  color: rgb(var(--text-muted));
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stat-number {
+  font-size: 1.65rem;
+  font-weight: 800;
+}
+
+.nav-link {
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.btn-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card-description {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgb(var(--text-secondary));
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0];
+}
+
+.glass {
+  background: rgb(var(--glass-bg) / 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(var(--glass-border) / 0.1);
+  transition: background 0.5s ease, border 0.5s ease;
+}
+
+.hero-grid {
+  background-image: 
+    linear-gradient(rgba(var(--accent-cyan), 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-cyan), 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at center, rgba(var(--accent-cyan), 0.15) 0%, transparent 70%);
+}
+
+.accent-border {
+  border: 1px solid rgb(var(--accent-cyan) / 0.15);
+}
