@@ -234,7 +234,7 @@ export default function TestimonialsManagement() {
                       value={currentTestimonial.name}
                       onChange={(e) => setCurrentTestimonial({ ...currentTestimonial, name: e.target.value })}
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-blue-500/50 transition-colors"
-                      placeholder="John Doe"
+                      placeholder="Rahul"
                     />
                   </div>
 
