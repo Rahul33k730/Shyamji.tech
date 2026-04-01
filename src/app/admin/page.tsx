@@ -51,12 +51,50 @@ const stats = [
 
 export default function Dashboard() {
   const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState<{
+    stats: any[],
+    recentLeads: any[],
+    conversionRate: string
+  } | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+    fetchStats();
   }, []);
 
-  if (!mounted) return null;
+  const fetchStats = async () => {
+    try {
+      const res = await fetch("/api/admin/stats");
+      const result = await res.json();
+      if (res.ok) {
+        setData(result);
+      }
+    } catch (error) {
+      console.error("Failed to fetch dashboard stats:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!mounted || loading) return (
+    <div className="h-[60vh] flex items-center justify-center">
+      <div className="w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />
+    </div>
+  );
+
+  const displayStats = data?.stats || [
+    { name: "Total Visitors", value: "0", change: "0%", trending: "up", icon: MousePointer2 },
+    { name: "Total Leads", value: "0", change: "0%", trending: "up", icon: Users },
+    { name: "Chatbot Sessions", value: "0", change: "0%", trending: "up", icon: MessageSquare },
+    { name: "Conversion Rate", value: "0%", change: "0%", trending: "up", icon: TrendingUp },
+  ];
+
+  // Add icons to the fetched stats
+  const statsWithIcons = displayStats.map((s, i) => {
+    const icons = [MousePointer2, Users, MessageSquare, TrendingUp];
+    return { ...s, icon: icons[i] || MousePointer2 };
+  });
 
   const lineChartData = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
@@ -144,7 +182,7 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, i) => (
+        {statsWithIcons.map((stat, i) => (
           <motion.div
             key={stat.name}
             initial={{ opacity: 0, y: 20 }}
@@ -221,16 +259,11 @@ export default function Dashboard() {
             <button className="text-xs font-bold text-blue-400 hover:underline">View All</button>
           </div>
           <div className="space-y-4">
-            {[
-              { name: "John Smith", email: "john@techcorp.com", service: "AI Solutions", time: "2h ago" },
-              { name: "Sarah Williams", email: "sarah@startup.io", service: "Web Development", time: "5h ago" },
-              { name: "Robert Jones", email: "robert@global.com", service: "App Development", time: "1d ago" },
-              { name: "Emily Davis", email: "emily@design.net", service: "Consulting", time: "2d ago" },
-            ].map((lead, i) => (
+            {(data?.recentLeads || []).map((lead, i) => (
               <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold">
-                    {lead.name.split(" ").map(n => n[0]).join("")}
+                    {lead.name.split(" ").map((n: string) => n[0]).join("")}
                   </div>
                   <div>
                     <p className="text-sm font-bold">{lead.name}</p>
@@ -243,6 +276,11 @@ export default function Dashboard() {
                 </div>
               </div>
             ))}
+            {(!data?.recentLeads || data.recentLeads.length === 0) && (
+              <div className="text-center py-10 text-gray-500 text-sm italic">
+                No recent leads found.
+              </div>
+            )}
           </div>
         </Card>
       </div>
