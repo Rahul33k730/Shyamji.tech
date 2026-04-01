@@ -29,9 +29,11 @@ export default function AdminLogin() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/admin");
+        // Success! The cookie is set by the server
+        window.location.href = "/admin";
       } else {
-        setError(data.error || "Login failed. Please check your credentials.");
+        const errorData = await res.json().catch(() => ({}));
+        setError(errorData.error || `Login failed (Status: ${res.status}). Please check your credentials.`);
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");
