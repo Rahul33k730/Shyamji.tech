@@ -41,7 +41,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   React.useEffect(() => {
     const checkAuth = async () => {
       if (pathname === "/admin/login") {
-        setIsAuthenticated(true);
         return;
       }
 
