@@ -151,12 +151,12 @@ export function Hero() {
               viewport={{ once: true }}
               variants={fadeUp}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
-              className="mb-8 text-primary leading-[1.02] flex flex-col"
+              className="mb-8 text-primary leading-[1.1] sm:leading-[1.02] flex flex-col"
             >
-              <span className="text-[1.02rem] md:text-[1.05em]">Building the Future</span>
-              <span className="flex items-center gap-[0.3em] whitespace-nowrap overflow-visible mt-2 text-[0.82em]">
+              <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter">Building the Future</span>
+              <span className="flex items-center gap-[0.3em] whitespace-nowrap overflow-visible mt-2 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter">
                 <span>of</span>
-                <span className="relative inline-flex min-w-[12ch] sm:min-w-[15ch] lg:min-w-[20ch] h-[1.2em]">
+                <span className="relative inline-flex min-w-[8ch] sm:min-w-[12ch] lg:min-w-[15ch] h-[1.2em]">
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={wordIndex}
@@ -209,30 +209,37 @@ export function Hero() {
               className="space-y-6"
             >
               <p className="badge text-secondary">PARTNERING WITH GLOBAL INNOVATORS</p>
-              <div className="flex gap-12">
+              <div className="grid grid-cols-3 gap-6 sm:gap-12">
                 <div className="space-y-1">
                   <Counter value={0} target={50} suffix="+" />
-                  <p className="card-description">Platforms Deployed</p>
+                  <p className="card-description text-[10px] sm:text-xs">Platforms Deployed</p>
                 </div>
                 <div className="space-y-1">
                   <Counter value={0} target={98} suffix="%" />
-                  <p className="card-description">Success Rate</p>
+                  <p className="card-description text-[10px] sm:text-xs">Success Rate</p>
                 </div>
                 <div className="space-y-1">
                   <Counter value={0} target={3} suffix="x" />
-                  <p className="card-description">Velocity Index</p>
+                  <p className="card-description text-[10px] sm:text-xs">Velocity Index</p>
                 </div>
               </div>
             </motion.div>
           </div>
 
           {/* Right Column */}
-          <div className="relative hidden lg:flex flex-col gap-6">
+          <div className="relative flex lg:flex flex-col gap-6 mt-12 lg:mt-0">
             {/* Main Card */}
             <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative p-8 glass rounded-[32px] overflow-hidden shadow-2xl z-20"
+              transition={{ 
+                opacity: { duration: 0.5 },
+                scale: { duration: 0.5 },
+                y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className="relative p-6 sm:p-8 glass rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl z-20"
             >
               <div className="flex justify-between items-center mb-10">
                 <div>

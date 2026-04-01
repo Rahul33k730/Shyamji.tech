@@ -57,7 +57,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -85,7 +85,7 @@ export function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="lg:hidden flex items-center gap-4">
           <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -97,27 +97,37 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-full left-0 right-0 glass border-b border-border/10 p-6 flex flex-col gap-4"
-        >
-          {navLinks.map((link) => (
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden absolute top-full left-0 right-0 glass border-b border-border/10 p-6 flex flex-col gap-4 overflow-hidden"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-bold text-secondary hover:text-primary transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
             <Link
-              key={link.name}
-              href={link.href}
+              href="/admin"
               onClick={() => setIsOpen(false)}
-              className="text-lg font-medium text-muted-foreground hover:text-foreground"
+              className="text-lg font-bold text-secondary hover:text-primary transition-colors"
             >
-              {link.name}
+              Admin
             </Link>
-          ))}
-          <button className="w-full py-3 rounded-xl bg-foreground text-background font-semibold">
-            Get Started
-          </button>
-        </motion.div>
-      )}
+            <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0] text-[#080a0e] font-black tracking-tight mt-2 shadow-[0_8px_30px_rgba(26,184,255,0.25)]">
+              Get Started
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }
