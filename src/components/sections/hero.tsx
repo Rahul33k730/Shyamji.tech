@@ -142,7 +142,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
             >
               <Zap className="w-4 h-4 text-[#1ab8ff]" />
-              <span className="badge gradient-text">⚡ ENGINEERING THE DIGITAL FRONTIER</span>
+              <span className="badge gradient-text">ENGINEERING THE DIGITAL FRONTIER</span>
             </motion.div>
 
             <motion.h1
