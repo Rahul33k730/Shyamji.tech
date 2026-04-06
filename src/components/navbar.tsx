@@ -69,15 +69,21 @@ export function Navbar() {
             </Link>
           ))}
           <ThemeToggle />
-          <Link
-            href="/admin"
-            className="nav-link text-muted hover:text-primary transition-colors"
-          >
-            Admin
-          </Link>
           <motion.button
-            whileHover={{ scale: 1.02, y: -2 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
+            animate={{ 
+              boxShadow: [
+                "0 0 0 0px rgba(26,184,255,0)",
+                "0 0 0 10px rgba(26,184,255,0.1)",
+                "0 0 0 0px rgba(26,184,255,0)"
+              ]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
             className="px-6 py-2.5 rounded-full bg-primary text-background btn-text font-semibold hover:shadow-[0_8px_40px_rgba(26,184,255,0.35)] transition-all"
           >
             Get Started
@@ -115,13 +121,6 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="/admin"
-              onClick={() => setIsOpen(false)}
-              className="text-lg font-bold text-secondary hover:text-primary transition-colors"
-            >
-              Admin
-            </Link>
             <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0] text-[#080a0e] font-black tracking-tight mt-2 shadow-[0_8px_30px_rgba(26,184,255,0.25)]">
               Get Started
             </button>

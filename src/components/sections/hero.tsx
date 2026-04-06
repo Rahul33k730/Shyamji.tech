@@ -14,14 +14,35 @@ const cyclingWords = [
   "Scalable Systems"
 ];
 
-function Counter({ value, target, suffix = "", delay = 1.4 }: { value: number, target: number, suffix?: string, delay?: number }) {
+function Counter({ value, target, suffix = "", delay = 0.1 }: { value: number, target: number, suffix?: string, delay?: number }) {
   const [count, setCount] = React.useState(0);
+  const [hasStarted, setHasStarted] = React.useState(false);
+  const countRef = React.useRef<HTMLSpanElement>(null);
   
   React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  React.useEffect(() => {
+    if (!hasStarted) return;
+
     let start = 0;
     const end = target;
     const duration = 2000;
-    const frames = 55;
+    const frames = 60;
     const increment = end / frames;
     
     const timer = setTimeout(() => {
@@ -38,9 +59,9 @@ function Counter({ value, target, suffix = "", delay = 1.4 }: { value: number, t
     }, delay * 1000);
     
     return () => clearTimeout(timer);
-  }, [target, delay]);
+  }, [target, delay, hasStarted]);
 
-  return <span className="stat-number">{count}{suffix}</span>;
+  return <span ref={countRef} className="stat-number">{count}{suffix}</span>;
 }
 
 export function Hero() {
