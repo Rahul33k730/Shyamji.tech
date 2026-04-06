@@ -9,12 +9,13 @@ import { ThemeToggle } from "./theme-toggle"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { name: "Services", href: "#services" },
-  { name: "Products", href: "#products" },
-  { name: "Why Us", href: "#why-us" },
-  { name: "Process", href: "#process" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/#services" },
+  { name: "Products", href: "/#products" },
+  { name: "Why Us", href: "/#why-us" },
+  { name: "Process", href: "/#process" },
+  { name: "Pricing", href: "/#pricing" },
+  { name: "Contact", href: "/#contact" },
 ]
 
 export function Navbar() {
