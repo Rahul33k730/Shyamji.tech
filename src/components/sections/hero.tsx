@@ -14,6 +14,23 @@ const cyclingWords = [
   "Scalable Systems"
 ];
 
+function Typewriter({ text }: { text: string }) {
+  const [displayText, setDisplayText] = React.useState("");
+  
+  React.useEffect(() => {
+    let i = 0;
+    setDisplayText("");
+    const interval = setInterval(() => {
+      setDisplayText(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 50);
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return <span>{displayText}</span>;
+}
+
 function Counter({ value, target, suffix = "", delay = 0.1 }: { value: number, target: number, suffix?: string, delay?: number }) {
   const [count, setCount] = React.useState(0);
   const [hasStarted, setHasStarted] = React.useState(false);
@@ -174,7 +191,9 @@ export function Hero() {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
               className="mb-8 text-primary leading-[1.1] sm:leading-[1.02] flex flex-col"
             >
-              <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter">Building the Future</span>
+              <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter">
+                <Typewriter text="Building the Future" />
+              </span>
               <span className="flex items-center gap-[0.3em] whitespace-nowrap overflow-visible mt-2 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter">
                 <span>of</span>
                 <span className="relative inline-flex min-w-[8ch] sm:min-w-[12ch] lg:min-w-[15ch] h-[1.2em]">

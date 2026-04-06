@@ -104,7 +104,7 @@ export function Services() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card variant="glass" padding="lg" className="h-full group hover:border-[#1ab8ff]/40 transition-all duration-300 flex flex-col hover:translate-x-[5px]">
+                <Card variant="glass" padding="lg" className="h-full group hover:border-[#1ab8ff]/40 transition-all duration-300 flex flex-col hover:translate-x-[5px] glow-card hover:shadow-[0_0_30px_rgba(26,184,255,0.1)]">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 bg-[#1ab8ff]/10`}>
                     <Icon className={`w-6 h-6 text-[#1ab8ff]`} />
                   </div>
