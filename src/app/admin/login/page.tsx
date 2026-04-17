@@ -105,7 +105,7 @@ export default function AdminLogin() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     autoFocus
-                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
+                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm text-[#111827] placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
                     placeholder="admin@shyamji.tech"
                   />
                 </div>
@@ -127,7 +127,7 @@ export default function AdminLogin() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
+                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm text-[#111827] placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
                     placeholder="••••••••"
                   />
                 </div>
