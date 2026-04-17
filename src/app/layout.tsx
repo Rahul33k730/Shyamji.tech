@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Chatbot } from "@/components/chatbot";
+import { RootWrapper } from "@/components/root-wrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,8 +41,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Chatbot />
+          <RootWrapper>
+            {children}
+          </RootWrapper>
         </ThemeProvider>
       </body>
     </html>

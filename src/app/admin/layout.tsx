@@ -15,10 +15,12 @@ import {
   Cpu, 
   Menu, 
   X,
-  MessageCircle
+  MessageCircle,
+  Globe
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/logo";
 
 const sidebarLinks = [
   { name: "Overview", href: "/admin", icon: LayoutDashboard },
@@ -97,14 +99,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         )}
       >
         <div className="h-full flex flex-col p-6">
-          <Link href="/" className="flex items-center gap-2 mb-10 group">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-emerald-500 group-hover:scale-110 transition-transform">
-              <Cpu className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold tracking-tight">Shyamji Admin</span>
-          </Link>
+          <div className="mb-10">
+            <Link href="/admin" className="flex items-center group">
+              <Logo size="sm" className="[&_span]:text-white" />
+            </Link>
+          </div>
 
-          <nav className="flex-1 space-y-2">
+          <nav className="flex-1 space-y-1.5">
+            <Link
+              href="/"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-blue-400 hover:text-white hover:bg-blue-500/10 transition-all mb-4 border border-blue-500/10"
+            >
+              <Globe className="w-5 h-5" />
+              Visit Website
+            </Link>
+
+            <div className="text-[10px] font-black text-gray-600 uppercase tracking-[2px] mb-4 ml-4">
+              Management
+            </div>
+
             {sidebarLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -114,11 +127,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   className={cn(
                     "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group",
                     isActive 
-                      ? "bg-white text-black" 
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20" 
                       : "text-gray-400 hover:text-white hover:bg-white/5"
                   )}
                 >
-                  <link.icon className={cn("w-5 h-5", isActive ? "text-black" : "text-gray-400 group-hover:text-white")} />
+                  <link.icon className={cn("w-5 h-5", isActive ? "text-white" : "text-gray-400 group-hover:text-white")} />
                   {link.name}
                 </Link>
               );
@@ -141,17 +154,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <header className="h-16 border-b border-white/5 flex items-center justify-between px-6 bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-30">
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded-lg hover:bg-white/5 lg:hidden"
+            className="p-2 rounded-lg hover:bg-white/5 lg:hidden text-white"
           >
             {isSidebarOpen ? <X /> : <Menu />}
           </button>
           
           <div className="flex items-center gap-4 ml-auto">
             <div className="hidden sm:flex flex-col items-end">
-              <span className="text-xs font-bold tracking-widest text-gray-500 uppercase">Administrator</span>
-              <span className="text-sm font-semibold">admin@shyamji.tech</span>
+              <span className="text-[10px] font-black tracking-[2px] text-blue-500 uppercase">Secure Access</span>
+              <span className="text-sm font-semibold text-white">System Administrator</span>
             </div>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 border border-white/10" />
+            <div className="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/20 flex items-center justify-center">
+              <Users className="w-5 h-5 text-blue-400" />
+            </div>
           </div>
         </header>
 

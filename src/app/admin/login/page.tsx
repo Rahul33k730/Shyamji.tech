@@ -41,26 +41,37 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f9fa] text-[#333] font-sans">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0a] text-white font-sans relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] -mr-[300px] -mt-[200px]" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[100px] -ml-[250px] -mb-[150px]" />
+
       {/* Brand Header */}
-      <div className="mb-8">
-        <Logo size="lg" />
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-12 relative z-10"
+      >
+        <Logo size="lg" className="[&_span]:text-white" />
+      </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-[400px] px-4"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="w-full max-w-[440px] px-6 relative z-10"
       >
-        <div className="bg-white border border-[#dee2e6] rounded shadow-sm overflow-hidden">
-          {/* Card Header (Django Teal/Blue) */}
-          <div className="bg-[#1A56DB] px-5 py-3 border-b border-[#1A56DB]">
-            <h2 className="text-white font-bold text-sm uppercase tracking-wider">
-              Administration Login
+        <div className="bg-[#111111] border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
+          {/* Card Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
+            <h2 className="text-white font-black text-lg uppercase tracking-widest text-center">
+              Secure Management Portal
             </h2>
+            <p className="text-blue-100/60 text-xs text-center mt-1 font-medium">
+              Enter credentials to access administration
+            </p>
           </div>
 
-          <div className="p-6 sm:p-8">
+          <div className="p-8 sm:p-10">
             <form onSubmit={handleLogin} className="space-y-6">
               {/* Error Message */}
               <AnimatePresence>
