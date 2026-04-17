@@ -2,129 +2,126 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Brain, Globe, Laptop, Rocket, Shield, Terminal } from "lucide-react"
+import { Monitor, Smartphone, Cpu, Database, ArrowRight, Code2, Globe2, BarChart3, Rocket } from "lucide-react"
+import Link from "next/link"
+
+const services = [
+  {
+    title: "Web Development",
+    description: "Enterprise-grade web applications built with React, Next.js, and scalable Node.js architectures for mission-critical performance.",
+    icon: Monitor,
+    details: ["React & Next.js", "Full Stack Systems", "Cloud Native"],
+    color: "bg-blue-500"
+  },
+  {
+    title: "Mobile Apps",
+    description: "High-performance native and cross-platform mobile solutions for iOS and Android devices, ensuring seamless user experiences.",
+    icon: Smartphone,
+    details: ["iOS & Android", "React Native", "Seamless UX"],
+    color: "bg-indigo-500"
+  },
+  {
+    title: "AI & Automation",
+    description: "Intelligent automation and GPT integrations to streamline business processes and unlock new operational efficiencies.",
+    icon: Cpu,
+    details: ["GPT Integrations", "Process Automation", "Custom AI Models"],
+    color: "bg-purple-500"
+  },
+  {
+    title: "Data Engineering",
+    description: "Robust data pipelines, ETL processes, and advanced analytics for data-driven decision making and strategic insights.",
+    icon: Database,
+    details: ["ETL Pipelines", "Data Analytics", "Performance Cleaning"],
+    color: "bg-cyan-500"
+  }
+]
 
 export function Services() {
-  const [servicesData, setServicesData] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const res = await fetch("/api/services");
-        const data = await res.json();
-        setServicesData(data.filter((s: any) => s.status === "active"));
-      } catch (error) {
-        console.error("Failed to fetch services:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchServices();
-  }, []);
-
-  const iconMap: any = {
-    Brain, Globe, Laptop, Rocket, Shield, Terminal
-  };
-
-  const initialServices = [
-    {
-      id: "1",
-      name: "AI Model Training",
-      description: "Customized AI training services tailored to your specific industry needs.",
-      price: "₹100,000",
-      category: "AI & Automation",
-      icon: "Brain",
-      status: "active",
-    },
-    {
-      id: "2",
-      name: "Custom Web Development",
-      description: "High-performance custom websites built with modern technologies like React and Next.js.",
-      price: "₹35,000",
-      category: "Web Development",
-      icon: "Globe",
-      status: "active",
-    },
-    {
-      id: "3",
-      name: "Mobile App Development",
-      description: "Native and cross-platform mobile applications designed for seamless user experiences.",
-      price: "₹60,000",
-      category: "Mobile Apps",
-      icon: "Smartphone",
-      status: "active",
-    },
-    {
-      id: "4",
-      name: "AI Automation Solutions",
-      description: "Automate your business workflows with intelligent AI-driven automation systems.",
-      price: "₹40,000",
-      category: "AI & Automation",
-      icon: "Zap",
-      status: "active",
-    },
-  ];
-
   return (
-    <section id="services" className="py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="text-left mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+    <section id="services" className="section-padding bg-white relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#EFF6FF] rounded-full blur-[100px] opacity-40 -translate-x-1/2 -translate-y-1/2" />
+      
+      <div className="container-custom relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 lg:mb-24">
+          <div className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="section-label"
+            >
+              CORE CAPABILITIES
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="mb-6"
+            >
+              Excellence in Engineering <br className="hidden md:block" />
+              <span className="text-[#1A56DB]">Every Digital Frontier</span>
+            </motion.h2>
+            <p className="text-[#6B7280] text-lg max-w-xl">
+              We provide end-to-end technology solutions that empower businesses to lead in a rapidly evolving digital landscape.
+            </p>
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-[36px] font-heading font-semibold mb-6 tracking-tight text-primary"
           >
-            Engineering Excellence for <br />
-            <span className="gradient-text">Global Innovators</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-secondary text-[16px] max-w-2xl leading-[1.6] font-normal"
-          >
-            We deploy industrial-grade AI, cloud-native architectures, and mission-critical software systems designed for infinite scale.
-          </motion.p>
+            <Link href="#contact" className="btn-outline group">
+              Get a Custom Proposal <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {(loading || servicesData.length === 0 ? initialServices : servicesData).map((service, i) => {
-            const Icon = iconMap[service.icon] || Brain;
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card variant="glass" padding="lg" className="h-full group hover:border-[#1ab8ff]/40 transition-all duration-300 flex flex-col hover:translate-x-[5px] glow-card hover:shadow-[0_0_30px_rgba(26,184,255,0.1)]">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 bg-[#1ab8ff]/10`}>
-                    <Icon className={`w-6 h-6 text-[#1ab8ff]`} />
-                  </div>
-                  <h3 className="text-[20px] font-heading font-semibold mb-3 tracking-tight text-primary">{service.name}</h3>
-                  <p className="card-description mb-8 flex-grow">
-                    {service.description}
-                  </p>
-                  <div className="mt-auto pt-6 border-t border-border/10 flex items-center justify-between">
-                    <div className="flex flex-col">
-                      <span className="badge text-muted mb-1">Starting at</span>
-                      <span className="stat-number text-xl text-primary">{service.price}</span>
-                    </div>
-                    <Button className="bg-foreground/5 text-primary border border-border/10 hover:border-[#1ab8ff]/50 btn-text py-2 px-4 rounded-lg">
-                      Learn More →
-                    </Button>
-                  </div>
-                </Card>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, i) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="group h-full"
+            >
+              <div className="relative h-full p-8 bg-white border border-[#E5E7EB] rounded-2xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(26,86,219,0.1)] hover:-translate-y-2 overflow-hidden">
+                {/* Hover Accent */}
+                <div className={`absolute top-0 left-0 w-full h-1 ${service.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+                
+                <div className="w-16 h-16 rounded-2xl bg-[#EFF6FF] flex items-center justify-center text-[#1A56DB] mb-8 group-hover:bg-[#1A56DB] group-hover:text-white transition-all duration-500 shadow-sm">
+                  <service.icon className="w-8 h-8" />
+                </div>
+                
+                <h3 className="text-xl font-bold text-[#111827] mb-4 group-hover:text-[#1A56DB] transition-colors duration-300">
+                  {service.title}
+                </h3>
+                
+                <p className="text-[#6B7280] text-[15px] leading-relaxed mb-8">
+                  {service.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mt-auto mb-8">
+                  {service.details.map(detail => (
+                    <span key={detail} className="text-[10px] font-bold text-[#1A56DB] bg-[#EFF6FF] px-2.5 py-1 rounded-md uppercase tracking-wider border border-[#1A56DB]/5">
+                      {detail}
+                    </span>
+                  ))}
+                </div>
+                
+                <Link 
+                  href="/#contact"
+                  className="inline-flex items-center gap-2 text-[#1A56DB] font-bold text-sm hover:gap-3 transition-all duration-300"
+                >
+                  Learn More <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

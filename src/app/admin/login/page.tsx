@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { Cpu, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Lock, AlertCircle, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/logo";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -26,107 +26,130 @@ export default function AdminLogin() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
-
       if (res.ok) {
-        // Success! The cookie is set by the server
+        // Redirect on success
         window.location.href = "/admin";
       } else {
         const errorData = await res.json().catch(() => ({}));
-        setError(errorData.error || `Login failed (Status: ${res.status}). Please check your credentials.`);
+        setError(errorData.error || "Please enter a correct username and password for a staff account. Note that both fields may be case-sensitive.");
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] animate-pulse delay-700" />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f9fa] text-[#333] font-sans">
+      {/* Brand Header */}
+      <div className="mb-8">
+        <Logo size="lg" />
+      </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full max-w-md px-6 relative z-10"
+        className="w-full max-w-[400px] px-4"
       >
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-emerald-500">
-              <Cpu className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-white">Shyamji Tech</span>
+        <div className="bg-white border border-[#dee2e6] rounded shadow-sm overflow-hidden">
+          {/* Card Header (Django Teal/Blue) */}
+          <div className="bg-[#1A56DB] px-5 py-3 border-b border-[#1A56DB]">
+            <h2 className="text-white font-bold text-sm uppercase tracking-wider">
+              Administration Login
+            </h2>
           </div>
-          <h1 className="text-3xl font-black text-white tracking-tight">Admin Portal</h1>
-          <p className="text-gray-400 mt-2">Enter your credentials to manage your platform</p>
+
+          <div className="p-6 sm:p-8">
+            <form onSubmit={handleLogin} className="space-y-6">
+              {/* Error Message */}
+              <AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="p-3 bg-red-50 border-l-4 border-red-500 rounded flex gap-3 items-start"
+                  >
+                    <AlertCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-xs font-medium text-red-700 leading-relaxed">
+                      {error}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Email Field */}
+              <div className="space-y-1.5">
+                <label className="text-[13px] font-bold text-[#666] flex items-center gap-2 uppercase tracking-wide">
+                  Email address:
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                    <Mail className="h-4 w-4 text-[#999] group-focus-within:text-[#1A56DB] transition-colors" />
+                  </div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    autoFocus
+                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
+                    placeholder="admin@shyamji.tech"
+                  />
+                </div>
+              </div>
+
+              {/* Password Field */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <label className="text-[13px] font-bold text-[#666] flex items-center gap-2 uppercase tracking-wide">
+                    Password:
+                  </label>
+                </div>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                    <Lock className="h-4 w-4 text-[#999] group-focus-within:text-[#1A56DB] transition-colors" />
+                  </div>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
+                    placeholder="••••••••"
+                  />
+                </div>
+              </div>
+
+              {/* Login Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={cn(
+                  "w-full py-2.5 px-4 bg-[#1A56DB] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-[0.1em] rounded shadow-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed",
+                  isLoading && "cursor-wait"
+                )}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Authenticating...
+                  </>
+                ) : (
+                  "Log in"
+                )}
+              </button>
+            </form>
+          </div>
         </div>
 
-        <Card variant="glass" padding="lg" className="border-white/5 shadow-2xl">
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1 flex items-center gap-2">
-                <Mail className="w-3 h-3" /> Email Address
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all"
-                placeholder="admin@shyamji.tech"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1 flex items-center gap-2">
-                <Lock className="w-3 h-3" /> Password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all"
-                placeholder="••••••••"
-              />
-            </div>
-
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 p-3 rounded-xl border border-red-400/20"
-              >
-                <AlertCircle className="w-4 h-4" />
-                {error}
-              </motion.div>
-            )}
-
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full group bg-white text-black hover:bg-white/90"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-              ) : (
-                <>
-                  Sign In <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </>
-              )}
-            </Button>
-          </form>
-        </Card>
-
-        <p className="text-center text-gray-500 text-xs mt-8">
-          Secure admin access restricted to authorized personnel only.
-          <br />© 2026 Shyamji Tech. All rights reserved.
-        </p>
+        {/* Support Links */}
+        <div className="mt-6 text-center">
+          <p className="text-xs text-[#999] font-medium">
+            &copy; {new Date().getFullYear()} Shyamji Tech. Secure Administration.
+          </p>
+        </div>
       </motion.div>
     </div>
   );

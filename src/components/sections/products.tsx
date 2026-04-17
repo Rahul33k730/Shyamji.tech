@@ -2,67 +2,80 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink, Github, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const projects = [
   {
     title: "AI Analysis Platform",
-    category: "AI & ML",
+    category: "AI & MACHINE LEARNING",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
-    description: "Real-time data analysis using advanced neural networks and predictive modeling.",
+    description: "Enterprise-grade real-time data analysis platform using advanced neural networks for predictive modeling.",
   },
   {
     title: "Modern SaaS Dashboard",
-    category: "Software",
+    category: "ENTERPRISE SOFTWARE",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    description: "Highly performant, cloud-native dashboard for monitoring complex enterprise metrics.",
+    description: "A highly performant, cloud-native dashboard designed for monitoring complex enterprise metrics and KPIs.",
   },
   {
     title: "Quantum E-Commerce",
-    category: "Web App",
+    category: "WEB APPLICATIONS",
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
-    description: "Next-gen shopping experience with serverless architecture and real-time inventory.",
+    description: "Next-generation shopping experience featuring serverless architecture and real-time inventory management.",
   },
 ]
 
 export function Products() {
   return (
-    <section id="products" className="py-24 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+    <section id="products" className="section-padding bg-white relative overflow-hidden">
+      <div className="container-custom">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-20">
           <div className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="section-label"
+            >
+              OUR PORTFOLIO
+            </motion.span>
             <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-[36px] font-heading font-semibold mb-6 tracking-tight text-primary"
+              className="mb-6"
             >
-              Transforming Ideas into <br />
-              <span className="gradient-text">World-Class Products</span>
+              Transforming Ideas into <br className="hidden md:block" />
+              Digital Excellence
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-secondary text-[16px] max-w-2xl leading-[1.6] font-normal"
+              className="text-[#6B7280] text-lg max-w-xl leading-relaxed"
             >
-              We don't just build software; we build the core engines of modern digital businesses.
+              We don't just build software; we architect the core engines of modern digital businesses for long-term success.
             </motion.p>
           </div>
           
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="px-8 py-4 rounded-xl glass border border-white/10 text-[16px] font-semibold tracking-[0.01em] hover:border-[#1ab8ff]/50 transition-all text-primary"
+            viewport={{ once: true }}
           >
-            View Case Studies
-          </motion.button>
+            <Link 
+              href="/#contact" 
+              className="btn-outline group"
+            >
+              View All Projects <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -70,9 +83,10 @@ export function Products() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
+              className="group"
             >
-              <Card variant="glass" padding="sm" className="h-full group overflow-hidden bg-card/40 border-border/10 hover:border-[#1ab8ff]/20 transition-all">
-                <div className="relative overflow-hidden aspect-video rounded-xl mb-6">
+              <div className="h-full bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <div className="relative overflow-hidden aspect-video">
                   <motion.img
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.6 }}
@@ -80,28 +94,27 @@ export function Products() {
                     alt={project.title}
                     className="object-cover w-full h-full"
                   />
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <button className="p-2 rounded-full glass hover:bg-[#1ab8ff]/20 transition-colors text-white">
-                      <Github className="w-4 h-4" />
-                    </button>
-                    <button className="p-2 rounded-full glass hover:bg-[#1ab8ff]/20 transition-colors text-white">
-                      <ExternalLink className="w-4 h-4" />
-                    </button>
-                  </div>
+                  <div className="absolute inset-0 bg-[#1A56DB]/0 group-hover:bg-[#1A56DB]/5 transition-colors duration-300" />
                 </div>
                 
-                <div className="p-6">
-                  <span className="text-[12px] font-semibold text-[#1ab8ff] uppercase tracking-widest mb-3 block">
+                <div className="p-8 lg:p-10">
+                  <span className="text-[10px] font-bold text-[#1A56DB] bg-[#EFF6FF] px-2 py-1 rounded-md uppercase tracking-wider mb-4 inline-block">
                     {project.category}
                   </span>
-                  <h3 className="text-[20px] font-heading font-semibold mb-3 tracking-tight text-primary group-hover:text-[#1ab8ff] transition-colors">
+                  <h3 className="text-xl font-bold text-[#111827] mb-4 group-hover:text-[#1A56DB] transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-secondary text-[16px] leading-relaxed font-normal">
+                  <p className="text-[#6B7280] text-sm leading-relaxed mb-6 line-clamp-2">
                     {project.description}
                   </p>
+                  <Link 
+                    href="/#contact"
+                    className="inline-flex items-center gap-2 text-[#1A56DB] font-bold text-sm hover:gap-3 transition-all"
+                  >
+                    View Case Study <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </div>

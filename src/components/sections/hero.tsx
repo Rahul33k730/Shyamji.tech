@@ -1,352 +1,239 @@
 "use client"
 
 import * as React from "react"
-import { motion, AnimatePresence, Variants } from "framer-motion"
-import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Zap, Globe, Smartphone, Brain, Database } from "lucide-react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { ArrowRight, CheckCircle2, Star, Users, Briefcase, Globe, Monitor, Smartphone, Cpu, Database, Layout, Sparkles } from "lucide-react"
+import Link from "next/link"
+import { ParticleNetwork } from "@/components/ui/particle-network"
 
-const cyclingWords = [
-  "Smart Tech",
-  "Elite Web Apps",
-  "AI-Driven Growth",
-  "Next-Gen Apps",
-  "Scalable Systems"
-];
+function Counter({ target, suffix = "", delay = 0 }: { target: number, suffix?: string, delay?: number }) {
+  const [count, setCount] = React.useState(0)
+  const ref = React.useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-function Typewriter({ text }: { text: string }) {
-  const [displayText, setDisplayText] = React.useState("");
-  
   React.useEffect(() => {
-    let i = 0;
-    setDisplayText("");
-    const interval = setInterval(() => {
-      setDisplayText(text.slice(0, i + 1));
-      i++;
-      if (i >= text.length) clearInterval(interval);
-    }, 50);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return <span>{displayText}</span>;
-}
-
-function Counter({ value, target, suffix = "", delay = 0.1 }: { value: number, target: number, suffix?: string, delay?: number }) {
-  const [count, setCount] = React.useState(0);
-  const [hasStarted, setHasStarted] = React.useState(false);
-  const countRef = React.useRef<HTMLSpanElement>(null);
-  
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasStarted) {
-          setHasStarted(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (countRef.current) {
-      observer.observe(countRef.current);
+    if (isInView) {
+      let start = 0
+      const end = target
+      const duration = 2000
+      const increment = end / (duration / 16)
+      
+      const timer = setTimeout(() => {
+        const interval = setInterval(() => {
+          start += increment
+          if (start >= end) {
+            setCount(end)
+            clearInterval(interval)
+          } else {
+            setCount(Math.floor(start))
+          }
+        }, 16)
+        return () => clearInterval(interval)
+      }, delay * 1000)
+      
+      return () => clearTimeout(timer)
     }
+  }, [isInView, target, delay])
 
-    return () => observer.disconnect();
-  }, [hasStarted]);
-
-  React.useEffect(() => {
-    if (!hasStarted) return;
-
-    let start = 0;
-    const end = target;
-    const duration = 2000;
-    const frames = 60;
-    const increment = end / frames;
-    
-    const timer = setTimeout(() => {
-      const interval = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(interval);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, duration / frames);
-      return () => clearInterval(interval);
-    }, delay * 1000);
-    
-    return () => clearTimeout(timer);
-  }, [target, delay, hasStarted]);
-
-  return <span ref={countRef} className="stat-number">{count}{suffix}</span>;
+  return <span ref={ref}>{count}{suffix}</span>
 }
 
-export function Hero() {
-  const [wordIndex, setWordIndex] = React.useState(0);
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const { theme, resolvedTheme } = useTheme();
+function RotatingText() {
+    const texts = [
+      "App Development", 
+      "AI & Automation", 
+      "Elite Web Tech", 
+      "Smart Tech", 
+      "AI-Driven Growth", 
+      "Scalable Systems",
+      "Elite Web Apps", 
+      "NextGen Apps",
+      "SaaS Solutions", 
+      "Cloud Systems", 
+      "Data Engineering"
+    ]
+  const [index, setIndex] = React.useState(0)
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % cyclingWords.length);
-    }, 2800);
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let particles: any[] = [];
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-      x = 0; y = 0; size = 0; speedY = 0; color = ""; opacity = 0; angle = 0;
-      constructor() { this.init(); }
-      init() {
-        this.x = Math.random() * canvas!.width;
-        this.y = canvas!.height + 10;
-        this.size = Math.random() * 2 + 1;
-        this.speedY = Math.random() * 0.5 + 0.2;
-        this.color = Math.random() > 0.5 ? '#1ab8ff' : '#00e5a0';
-        this.opacity = 0;
-        this.angle = Math.random() * Math.PI * 2;
-      }
-      update() {
-        this.y -= this.speedY;
-        this.angle += 0.01;
-        this.opacity = (Math.sin(this.angle) + 1) / 2 * 0.3;
-        if (this.y < -10) this.init();
-      }
-      draw() {
-        ctx!.globalAlpha = resolvedTheme === 'light' ? this.opacity * 0.5 : this.opacity;
-        ctx!.fillStyle = this.color;
-        ctx!.beginPath();
-        ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx!.fill();
-      }
-    }
-
-    for (let i = 0; i < 130; i++) particles.push(new Particle());
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener('resize', resize);
-    };
-  }, [theme]);
-
-  const fadeUp: Variants = {
-    initial: { opacity: 0, y: 26 },
-    animate: { opacity: 1, y: 0 },
-  };
+      setIndex((prev) => (prev + 1) % texts.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-[100px] pb-[60px] px-[5%] overflow-hidden bg-background">
-      <canvas ref={canvasRef} className="absolute inset-0 -z-10 pointer-events-none" />
-      <div className="absolute inset-0 -z-10 hero-grid pointer-events-none" />
-      
-      <motion.div 
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] bg-[#1ab8ff] rounded-full blur-[110px] opacity-[0.05] dark:opacity-[0.12] -z-10 pointer-events-none" 
-      />
-      <motion.div 
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: -4.5 }}
-        className="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#00e5a0] rounded-full blur-[110px] opacity-[0.05] dark:opacity-[0.12] -z-10 pointer-events-none" 
-      />
+    <div className="h-[1.4em] relative overflow-hidden inline-block align-bottom min-w-[280px] sm:min-w-[650px] ml-2">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ x: -60, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 60, opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="absolute left-0 bottom-0 text-[#1A56DB] whitespace-nowrap pb-1"
+        >
+          {texts[index]}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  )
+}
 
-      <div className="container mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-[100px] items-center">
-          {/* Left Column */}
-          <div className="max-w-[750px]">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+const statsData = [
+  { label: "Platforms Deployed", value: 50, suffix: "+" },
+  { label: "Success Rate", value: 98, suffix: "%" },
+  { label: "Velocity Index", value: 3, suffix: "X" }
+]
+
+export function Hero() {
+  // Robust hero image source with fallbacks
+  const heroCandidates = React.useMemo(
+    () => [
+      "/image1.png",
+      "/image1.jpg",
+      "/image%201.png",
+      "/image 1.png",
+      "/hero.jpg",
+      "/hero.png",
+      "/hero.jpeg",
+      "/hero.webp",
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=1200&fit=crop",
+    ],
+    []
+  )
+  const [heroSrcIndex, setHeroSrcIndex] = React.useState(0)
+  const handleHeroError = React.useCallback(() => {
+    setHeroSrcIndex((i) => (i + 1 < heroCandidates.length ? i + 1 : i))
+  }, [heroCandidates.length])
+  const heroSrc = heroCandidates[heroSrcIndex]
+
+  return (
+    <section className="relative pt-32 pb-20 lg:pt-52 lg:pb-40 overflow-hidden bg-white">
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.3] z-0" />
+      <ParticleNetwork />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#EFF6FF] rounded-full blur-[120px] -mr-[400px] -mt-[200px] opacity-60 z-0" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#EFF6FF] rounded-full blur-[100px] -ml-[300px] -mb-[200px] opacity-40 z-0" />
+      {/* Full-bleed hero background image */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src={heroSrc}
+          alt="Engineering Team Working"
+          className="w-full h-full object-cover object-[60%_50%]"
+          onError={handleHeroError}
+        />
+        {/* Readability overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/30 to-transparent pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-[42%] bg-gradient-to-r from-white/85 to-transparent pointer-events-none" />
+      </div>
+
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EFF6FF] border border-[#1A56DB]/10 mb-8">
+              <Sparkles className="w-4 h-4 text-[#1A56DB]" />
+              <span className="text-[11px] font-bold text-[#1A56DB] uppercase tracking-[1.5px]">Engineering the Digital Frontier</span>
+            </div>
+            
+            <h1 className="mb-8 tracking-tight leading-[1.2] text-[#111827]">
+              Building the Future of <RotatingText />
+            </h1>
+            
+            <p className="text-slate-700 text-lg lg:text-xl leading-relaxed mb-12 max-w-xl font-medium">
+              We engineer high-performance digital infrastructure for the next generation of startups. From AI-driven automation to scalable enterprise platforms.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-5 mb-20">
+              <Link href="#contact" className="btn-primary px-8 py-4 text-lg shadow-lg shadow-[#1A56DB]/20 group">
+                Get Started <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="#services" className="btn-outline px-8 py-4 text-lg">
+                View Services
+              </Link>
+            </div>
+
+            {/* Stats below Get Started */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="pt-12"
             >
-              <Zap className="w-4 h-4 text-[#1ab8ff]" />
-              <span className="badge gradient-text">ENGINEERING THE DIGITAL FRONTIER</span>
-            </motion.div>
-
-            <motion.h1
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
-              className="mb-8 text-primary leading-[1.1] sm:leading-[1.02] flex flex-col"
-            >
-              <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter">
-                <Typewriter text="Building the Future" />
-              </span>
-              <span className="flex items-center gap-[0.3em] whitespace-nowrap overflow-visible mt-2 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter">
-                <span>of</span>
-                <span className="relative inline-flex min-w-[8ch] sm:min-w-[12ch] lg:min-w-[15ch] h-[1.2em]">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={wordIndex}
-                      initial={{ x: -10, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: 10, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      className="gradient-text absolute left-0 whitespace-nowrap py-1"
-                    >
-                      {cyclingWords[wordIndex]}
-                    </motion.span>
-                  </AnimatePresence>
-                </span>
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              className="text-secondary text-[1.15rem] mb-12 max-w-[600px] font-light leading-[1.7] tracking-tight"
-            >
-              We engineer high-performance digital infrastructure for the next generation of startups. From AI-driven automation to scalable enterprise platforms, we turn complex technical challenges into seamless reality.
-            </motion.p>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.65 }}
-              className="flex flex-col sm:flex-row items-center gap-4 mb-20"
-            >
-              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0] text-[#080a0e] btn-text h-12 px-8 rounded-xl hover:-translate-y-0.5 transition-transform hover:shadow-[0_8px_40px_rgba(26,184,255,0.35)] border-none group">
-                Get Started <ArrowRight className="inline-block ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-border/10 hover:border-[#1ab8ff] btn-text h-12 px-8 rounded-xl text-primary bg-transparent">
-                View Services →
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
-              className="space-y-6"
-            >
-              <p className="badge text-secondary">PARTNERING WITH GLOBAL INNOVATORS</p>
-              <div className="grid grid-cols-3 gap-6 sm:gap-12">
-                <div className="space-y-1">
-                  <Counter value={0} target={50} suffix="+" />
-                  <p className="card-description text-[10px] sm:text-xs">Platforms Deployed</p>
-                </div>
-                <div className="space-y-1">
-                  <Counter value={0} target={98} suffix="%" />
-                  <p className="card-description text-[10px] sm:text-xs">Success Rate</p>
-                </div>
-                <div className="space-y-1">
-                  <Counter value={0} target={3} suffix="x" />
-                  <p className="card-description text-[10px] sm:text-xs">Velocity Index</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column */}
-          <div className="relative flex lg:flex flex-col gap-6 mt-12 lg:mt-0">
-            {/* Main Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ 
-                opacity: { duration: 0.5 },
-                scale: { duration: 0.5 },
-                y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-              }}
-              className="relative p-6 sm:p-8 glass rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl z-20"
-            >
-              <div className="flex justify-between items-center mb-10">
-                <div>
-                  <div className="badge text-secondary mb-1">CURRENTLY BUILDING</div>
-                  <h3 className="text-xl font-bold text-primary">Client Dashboard v2.4</h3>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1 bg-[#00e5a0]/10 border border-[#00e5a0]/20 rounded-full text-[#00e5a0] text-[10px] font-bold">
-                  <div className="w-1.5 h-1.5 bg-[#00e5a0] rounded-full animate-pulse" />
-                  Live
-                </div>
-              </div>
-
-              {/* Service Rows */}
-              <div className="space-y-4">
-                {[
-                  { icon: Globe, label: "Web Development", desc: "React, Next.js, full-stack apps", badge: "Popular", bColor: "#1ab8ff" },
-                  { icon: Smartphone, label: "Mobile Apps", desc: "iOS, Android, React Native", badge: "New", bColor: "#00e5a0" },
-                  { icon: Brain, label: "AI & Automation", desc: "GPT integrations, data pipelines", badge: "Hot", bColor: "#f43f5e" },
-                  { icon: Database, label: "Data Engineering", desc: "Cleaning, ETL & analytics", badge: "Fast", bColor: "#8b5cf6" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-foreground/5 border border-border/5 hover:bg-foreground/10 transition-colors group cursor-default">
-                    <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center text-primary/40 group-hover:text-primary transition-colors">
-                      <item.icon className="w-5 h-5" />
+              <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-[2px] mb-8">
+                PARTNERING WITH GLOBAL INNOVATORS
+              </p>
+              <div className="grid grid-cols-3 gap-8 md:gap-12 -ml-2 sm:-ml-4 md:-ml-6">
+                {statsData.map((stat, i) => (
+                  <div key={i} className="flex flex-col gap-1">
+                    <div className="text-3xl md:text-5xl font-black text-[#111827] tracking-tight">
+                      <Counter target={stat.value} suffix={stat.suffix} />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-sm font-bold text-primary">{item.label}</span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: `${item.bColor}20`, color: item.bColor }}>
-                          {item.badge}
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-secondary">{item.desc}</p>
-                    </div>
+                    <p className="text-[#6B7280] text-xs md:text-sm font-medium">
+                      {stat.label}
+                    </p>
                   </div>
                 ))}
               </div>
             </motion.div>
+          </motion.div>
 
-            {/* Bottom Row Mini Cards */}
-            <div className="grid grid-cols-2 gap-6 px-2">
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: -1.2 }}
-                className="p-6 glass rounded-3xl shadow-xl"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#1ab8ff]/10 flex items-center justify-center text-[#1ab8ff]">⚡</div>
-                  <div className="stat-number text-lg text-primary">14d</div>
-                </div>
-                <p className="card-description text-[10px]">Avg. MVP Delivery</p>
-                <div className="text-[10px] text-[#00e5a0] font-bold mt-1">↑ 2x faster</div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: -3.2 }}
-                className="p-6 glass rounded-3xl shadow-xl"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#00e5a0]/10 flex items-center justify-center text-[#00e5a0]">🚀</div>
-                  <div className="stat-number text-lg text-primary">∞</div>
-                </div>
-                <p className="card-description text-[10px]">Ideas We Can Build</p>
-                <div className="text-[10px] text-secondary font-bold mt-1">Any Stack</div>
-              </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="relative hidden"
+          >
+            {/* Main Image Container (edge-to-edge like your reference) */}
+            <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.25)]">
+              <div className="relative overflow-hidden aspect-[16/10] lg:aspect-[16/9]">
+                <img
+                  src={heroSrc}
+                  alt="Engineering Team Working"
+                  className="w-full h-full object-cover object-[60%_50%]"
+                  onError={handleHeroError}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/40 to-transparent pointer-events-none" />
+                <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-white/65 to-transparent pointer-events-none" />
+              </div>
             </div>
-          </div>
+            
+            {/* Floating Trust Elements */}
+            <motion.div 
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-8 -left-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-[#E5E7EB] flex items-center gap-4 max-w-[240px] z-20"
+            >
+              <div className="w-12 h-12 rounded-full bg-[#1A56DB] flex items-center justify-center text-white shadow-lg shadow-[#1A56DB]/30">
+                <CheckCircle2 className="w-7 h-7" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-[#111827] leading-tight mb-1">Enterprise Grade Architecture</p>
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3 h-3 fill-[#FBBF24] text-[#FBBF24]" />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              animate={{ y: [0, 15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute -top-10 -right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-[#E5E7EB] flex items-center gap-4 max-w-[220px] z-20"
+            >
+              <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#1A56DB]">
+                <Users className="w-7 h-7" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-[#111827] leading-tight mb-1">Top-Tier Tech Talent</p>
+                <p className="text-xs text-[#6B7280]">100+ Engineers India-wide</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -26,7 +26,7 @@ export default function Home() {
     <main className="relative min-h-screen">
       {/* Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 z-[60] origin-left"
+        className="fixed top-0 left-0 right-0 h-1 bg-[#1A56DB] z-[60] origin-left"
         style={{ scaleX }}
       />
       

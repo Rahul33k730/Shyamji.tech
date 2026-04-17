@@ -2,14 +2,12 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { useTheme } from "next-themes"
-import { Menu, X, Cpu } from "lucide-react"
-import { ThemeToggle } from "./theme-toggle"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Logo } from "@/components/ui/logo"
 
 const navLinks = [
-  { name: "About", href: "/about" },
   { name: "Services", href: "/#services" },
   { name: "Products", href: "/#products" },
   { name: "Why Us", href: "/#why-us" },
@@ -20,85 +18,57 @@ const navLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
-  const { scrollY } = useScroll()
-  const { theme } = useTheme()
-  
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgb(var(--background) / 0)", "rgb(var(--background) / 0.8)"]
-  )
-  
-  const backdropBlur = useTransform(
-    scrollY,
-    [0, 100],
-    ["blur(0px)", "blur(12px)"]
-  )
+  const [scrolled, setScrolled] = React.useState(false)
 
-  const borderBottom = useTransform(
-    scrollY,
-    [0, 100],
-    ["1px solid rgb(var(--border) / 0)", "1px solid rgb(var(--border) / 0.1)"]
-  )
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ backgroundColor, backdropFilter: backdropBlur, borderBottom }}
-      className="fixed top-0 left-0 right-0 z-50"
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 bg-white border-b border-gray-100",
+        scrolled ? "h-28 shadow-sm" : "h-32"
+      )}
     >
-      <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-[#1ab8ff] to-[#00e5a0] group-hover:scale-110 transition-transform duration-300">
-            <Cpu className="w-6 h-6 text-[#080a0e]" />
-          </div>
-          <span className="text-xl font-black tracking-tighter text-primary transition-transform duration-300 group-hover:scale-105">SHYAMJI TECH</span>
+      <nav className="container-custom flex items-center justify-between h-full">
+        <Link href="/" className="flex items-center">
+          <Logo size="md" />
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="nav-link text-muted hover:text-primary transition-colors relative group/link py-1"
+              className="px-4 py-2 rounded-lg text-[15px] font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50/50 transition-all duration-200"
             >
               {link.name}
-              <span className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0] origin-left scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300" />
             </Link>
           ))}
-          <ThemeToggle />
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            animate={{ 
-              boxShadow: [
-                "0 0 0 0px rgba(26,184,255,0)",
-                "0 0 0 10px rgba(26,184,255,0.1)",
-                "0 0 0 0px rgba(26,184,255,0)"
-              ]
-            }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-            className="px-6 py-2.5 rounded-full bg-primary text-background btn-text font-semibold hover:shadow-[0_8px_40px_rgba(26,184,255,0.35)] transition-all"
-          >
-            Get Started
-          </motion.button>
+          <div className="ml-4">
+            <Link
+              href="/#contact"
+              className="px-6 py-2.5 rounded-xl bg-blue-600 text-white text-[15px] font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/25 active:scale-95"
+            >
+              Get Started
+            </Link>
+          </div>
         </div>
 
         {/* Mobile Toggle */}
-        <div className="lg:hidden flex items-center gap-4">
-          <ThemeToggle />
+        <div className="lg:hidden flex items-center">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-foreground"
+            className="p-2 text-[#111827] focus:outline-none"
+            aria-label="Toggle menu"
           >
-            {isOpen ? <X /> : <Menu />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
@@ -110,24 +80,30 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-full left-0 right-0 glass border-b border-border/10 p-6 flex flex-col gap-4 overflow-hidden"
+            className="lg:hidden bg-white border-t border-[#E5E7EB] overflow-hidden"
           >
-            {navLinks.map((link) => (
+            <div className="flex flex-col p-6 gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-base font-semibold text-gray-900 hover:text-blue-600 transition-colors py-2"
+                >
+                  {link.name}
+                </Link>
+              ))}
               <Link
-                key={link.name}
-                href={link.href}
+                href="/#contact"
                 onClick={() => setIsOpen(false)}
-                className="text-lg font-bold text-secondary hover:text-primary transition-colors"
+                className="w-full py-4 rounded-xl bg-blue-600 text-white text-center font-bold mt-4 shadow-xl shadow-blue-500/20"
               >
-                {link.name}
+                Get Started
               </Link>
-            ))}
-            <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0] text-[#080a0e] font-black tracking-tight mt-2 shadow-[0_8px_30px_rgba(26,184,255,0.25)]">
-              Get Started
-            </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   )
 }

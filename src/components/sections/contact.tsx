@@ -2,144 +2,117 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Mail, MessageSquare, Send } from "lucide-react"
+import { Mail, Phone, Linkedin, Twitter, Instagram } from "lucide-react"
 
 export function Contact() {
-  const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    service: "AI & Machine Learning",
-    message: ""
-  });
-  const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (res.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", service: "AI & Machine Learning", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      setStatus("error");
-    }
-  };
-
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-background">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-[36px] font-heading font-semibold mb-8 tracking-tight text-primary">
-              Ready to Build Your <br />
-              <span className="gradient-text">Future with Us?</span>
-            </h2>
-            <p className="text-secondary text-[16px] leading-[1.6] mb-10 max-w-xl font-normal">
-              Our team of experts is ready to help you build the next generation of digital solutions. Let's talk about your project and see how we can work together.
-            </p>
-            
-            <div className="space-y-6">
-              {[
-                { icon: Mail, label: "Email", value: "shyamjitech33@gmail.com" },
-                { icon: MessageSquare, label: "Phone", value: "+91 9580893230" },
-              ].map((item, i) => (
-                <div key={item.label} className="flex items-center gap-4">
-                  <div className="p-3 rounded-2xl bg-[#1ab8ff]/10 text-[#1ab8ff]">
-                    <item.icon className="w-5 h-5" />
+    <section id="contact" className="section-padding bg-[#EFF6FF] relative">
+      <div className="container-custom">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            {/* Left Side: Contact Details */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="mb-8 lg:mb-10">
+                Ready to Build Your <br />
+                Future With Us?
+              </h2>
+              <p className="text-[#6B7280] text-lg mb-12 max-w-md leading-relaxed">
+                Contact our expert engineering team today to discuss your next project and how we can help you scale.
+              </p>
+
+              <div className="space-y-8 mb-12">
+                <div className="flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-[#1A56DB] shadow-sm">
+                    <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">{item.label}</p>
-                    <p className="text-primary font-semibold text-[16px] tracking-tight">{item.value}</p>
+                    <p className="text-[12px] font-bold text-[#6B7280] uppercase tracking-[2px] mb-1">Email Us</p>
+                    <p className="text-xl font-bold text-[#111827]">hello@shyamji.tech</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <Card variant="glass" padding="lg" className="border-border/10 bg-card/40 shadow-2xl">
-              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-[#1A56DB] shadow-sm">
+                    <Phone className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-[12px] font-bold text-[#6B7280] uppercase tracking-[2px] mb-1">Call Us</p>
+                    <p className="text-xl font-bold text-[#111827]">+91 9580893230</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                {[
+                  { icon: Linkedin, href: "#" },
+                  { icon: Twitter, href: "#" },
+                  { icon: Instagram, href: "#" }
+                ].map((social, i) => (
+                  <a 
+                    key={i} 
+                    href={social.href}
+                    className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#1A56DB] hover:bg-[#1A56DB] hover:text-white transition-all shadow-sm active:scale-95"
+                  >
+                    <social.icon className="w-6 h-6" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right Side: Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-[#E5E7EB]"
+            >
+              <form className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[12px] font-semibold uppercase tracking-widest text-muted ml-1">Full Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/10 focus:border-[#1ab8ff]/50 outline-none transition-colors text-primary text-[16px]"
-                      placeholder="Rahul"
+                    <label className="text-[12px] font-bold text-[#6B7280] uppercase tracking-wider">Full Name</label>
+                    <input 
+                      type="text" 
+                      placeholder="Rahul Sharma" 
+                      className="w-full px-4 py-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] focus:border-[#1A56DB] focus:bg-white outline-none transition-all text-sm font-medium"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[12px] font-semibold uppercase tracking-widest text-muted ml-1">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/10 focus:border-[#1ab8ff]/50 outline-none transition-colors text-primary text-[16px]"
-                      placeholder="rahul@example.com"
+                    <label className="text-[12px] font-bold text-[#6B7280] uppercase tracking-wider">Email Address</label>
+                    <input 
+                      type="email" 
+                      placeholder="rahul@example.com" 
+                      className="w-full px-4 py-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] focus:border-[#1A56DB] focus:bg-white outline-none transition-all text-sm font-medium"
                     />
                   </div>
                 </div>
-                
                 <div className="space-y-2">
-                  <label className="text-[12px] font-semibold uppercase tracking-widest text-muted ml-1">Select Service</label>
-                  <select
-                    value={formData.service}
-                    onChange={(e) => setFormData({...formData, service: e.target.value})}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border/10 focus:border-[#1ab8ff]/50 outline-none transition-colors text-primary text-[16px] appearance-none"
-                  >
-                    <option>AI & Machine Learning</option>
+                  <label className="text-[12px] font-bold text-[#6B7280] uppercase tracking-wider">Select Service</label>
+                  <select className="w-full px-4 py-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] focus:border-[#1A56DB] focus:bg-white outline-none transition-all text-sm font-medium appearance-none cursor-pointer">
                     <option>Web Development</option>
-                    <option>Mobile App Development</option>
-                    <option>Cloud Infrastructure</option>
+                    <option>Mobile Apps</option>
+                    <option>AI & Automation</option>
+                    <option>Data Engineering</option>
                   </select>
                 </div>
-                
                 <div className="space-y-2">
-                  <label className="text-[12px] font-semibold uppercase tracking-widest text-muted ml-1">Project Message</label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border/10 focus:border-[#1ab8ff]/50 outline-none transition-colors text-primary text-[16px] resize-none"
-                    placeholder="Tell us about your project..."
-                  />
+                  <label className="text-[12px] font-bold text-[#6B7280] uppercase tracking-wider">Message</label>
+                  <textarea 
+                    rows={4} 
+                    placeholder="Tell us about your project requirements..." 
+                    className="w-full px-4 py-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] focus:border-[#1A56DB] focus:bg-white outline-none transition-all text-sm font-medium resize-none"
+                  ></textarea>
                 </div>
-                
-                <Button 
-                  disabled={status === "loading"}
-                  className="w-full py-6 bg-gradient-to-r from-[#1ab8ff] to-[#00e5a0] text-[#080a0e] font-semibold text-[16px] tracking-[0.01em] rounded-xl flex items-center justify-center gap-2"
-                >
-                  {status === "loading" ? "Sending..." : status === "success" ? "Message Sent!" : "Book a Consultation"}
-                  <Send className="w-4 h-4" />
-                </Button>
+                <button className="w-full py-4 bg-[#1A56DB] text-white font-bold rounded-xl hover:bg-[#1E3A8A] transition-all shadow-lg hover:shadow-[#1A56DB]/20 active:scale-[0.98]">
+                  Book a Consultation
+                </button>
               </form>
-            </Card>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

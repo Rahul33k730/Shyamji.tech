@@ -2,94 +2,134 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { CheckCircle2, Cloud, Code2, Database, ShieldCheck, Zap } from "lucide-react"
+import { Shield, Zap, Layers, Users, CheckCircle } from "lucide-react"
 
 const features = [
   {
     title: "Scalable Architecture",
-    description: "Built for growth, our systems scale seamlessly from 100 to 100 million users.",
-    icon: Cloud,
+    description: "Cloud-native systems designed for massive concurrency and future-proof scalability.",
+    icon: Layers
   },
   {
     title: "Enterprise-Grade Security",
-    description: "Multi-layered security protocols to keep your business and data protected.",
-    icon: ShieldCheck,
+    description: "Industry-standard protocols and security audits to ensure data integrity and compliance.",
+    icon: Shield
   },
   {
     title: "Real-time Processing",
-    description: "Low-latency systems optimized for high-performance and instant response.",
-    icon: Zap,
+    description: "Low-latency data processing engines for instant insights and rapid synchronization.",
+    icon: Zap
   },
   {
     title: "Full-Stack Expertise",
-    description: "From database optimization to pixel-perfect UI, we handle everything.",
-    icon: Code2,
-  },
+    description: "Mastery across modern web, mobile, and backend technologies for cohesive systems.",
+    icon: Users
+  }
 ]
 
 export function WhyUs() {
   return (
-    <section id="why-us" className="py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="why-us" className="section-padding bg-[#EFF6FF] relative overflow-hidden">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.2] z-0" />
+      
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-[36px] font-heading font-semibold mb-8 tracking-tight text-primary">
-              Why Forward-Thinking <br />
-              <span className="gradient-text">Teams Choose Us</span>
+            <span className="section-label">
+              WHY SHYAMJI TECHNOLOGIES
+            </span>
+            <h2 className="mb-10 lg:mb-12">
+              Why Forward-Thinking <br className="hidden md:block" />
+              Teams Choose Us
             </h2>
-            <p className="text-secondary text-[16px] leading-[1.6] mb-10 max-w-xl font-normal">
-              We don't just build code; we build business solutions that are designed to lead the market. Our approach combines technical brilliance with strategic thinking.
-            </p>
             
-            <ul className="space-y-6">
-              {[
-                "Accelerated time-to-market for complex software",
-                "Proven track record with top Indian startups",
-                "Highly specialized AI and ML expertise",
-                "Transparent and collaborative development process"
-              ].map((item, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+            <p className="text-[#6B7280] text-lg mb-12 max-w-xl leading-relaxed">
+              We don't just build software; we architect the foundations of digital success. Our commitment to quality, security, and scalability sets us apart.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10">
+              {features.map((feature, i) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex items-center gap-4 text-primary font-medium text-[16px]"
+                  className="group"
                 >
-                  <div className="p-1 rounded-full bg-[#00e5a0]/10 text-[#00e5a0]">
-                    <CheckCircle2 className="w-4 h-4" />
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#1A56DB] shadow-md transition-transform group-hover:scale-110 duration-300">
+                      <feature.icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#111827]">{feature.title}</h3>
                   </div>
-                  {item}
-                </motion.li>
+                  <p className="text-[#6B7280] text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </motion.div>
               ))}
-            </ul>
+            </div>
+            
+            <div className="mt-12 flex flex-wrap gap-6">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-[#1A56DB]" />
+                <span className="text-sm font-bold text-[#111827]">99.9% Uptime SLA</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-[#1A56DB]" />
+                <span className="text-sm font-bold text-[#111827]">ISO 27001 Certified</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-[#1A56DB]" />
+                <span className="text-sm font-bold text-[#111827]">24/7 Support</span>
+              </div>
+            </div>
           </motion.div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="p-8 glass rounded-3xl border border-border/10 bg-card/40 hover:border-[#1ab8ff]/20 transition-all group"
-              >
-                <div className="p-3 rounded-2xl bg-[#1ab8ff]/10 text-[#1ab8ff] w-fit mb-6 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-6 h-6" />
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, x: 30 }}
+            whileInView={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.2)] border-8 border-white/50 aspect-[4/5] lg:aspect-square">
+              <img 
+                src="/image2.png" 
+                alt="Professional Office Team" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A56DB]/20 to-transparent mix-blend-overlay" />
+            </div>
+            
+            {/* Overlay card */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="absolute -bottom-10 -right-10 bg-white p-8 rounded-3xl shadow-2xl border border-[#E5E7EB] max-w-[280px] hidden md:block"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#1A56DB]">
+                  <Users className="w-6 h-6" />
                 </div>
-                <h3 className="text-[20px] font-heading font-semibold mb-3 tracking-tight text-primary">{feature.title}</h3>
-                <p className="text-secondary text-[16px] leading-[1.6] font-normal">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+                <div>
+                  <p className="text-2xl font-bold text-[#111827]">50+</p>
+                  <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider">Projects Delivered</p>
+                </div>
+              </div>
+              <p className="text-sm text-[#6B7280] leading-relaxed">
+                "Shyamji Tech built exactly what we needed, making the entire process smooth and professional."
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

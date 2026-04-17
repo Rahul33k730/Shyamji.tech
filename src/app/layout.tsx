@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Syne, DM_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Chatbot } from "@/components/chatbot";
 
-const syne = Syne({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-inter",
 });
 
-const dmSans = DM_Sans({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-plus-jakarta",
 });
 
 export const metadata: Metadata = {
   title: "Shyamji Tech | Building the Future of Intelligent Technology",
-  description: "A premium AI and software technology company delivering cutting-edge solutions.",
+  description: "A premium AI and software technology company delivering cutting-edge solutions for global enterprises.",
+  icons: {
+    icon: "/logo1.png",
+    apple: "/logo1.png",
+    shortcut: "/logo1.png",
+  },
 };
 
 export default function RootLayout({
@@ -27,11 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${syne.variable} ${dmSans.variable} font-sans antialiased`}
+        className={`${plusJakartaSans.variable} ${inter.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
