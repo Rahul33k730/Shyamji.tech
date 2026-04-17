@@ -6,28 +6,40 @@ import { ExternalLink, Github, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-const projects = [
-  {
-    title: "AI Analysis Platform",
-    category: "AI & MACHINE LEARNING",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
-    description: "Enterprise-grade real-time data analysis platform using advanced neural networks for predictive modeling.",
-  },
-  {
-    title: "Modern SaaS Dashboard",
-    category: "ENTERPRISE SOFTWARE",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    description: "A highly performant, cloud-native dashboard designed for monitoring complex enterprise metrics and KPIs.",
-  },
-  {
-    title: "Quantum E-Commerce",
-    category: "WEB APPLICATIONS",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
-    description: "Next-generation shopping experience featuring serverless architecture and real-time inventory management.",
-  },
-]
+interface Project {
+  id: string
+  title: string
+  category: string
+  image: string
+  description: string
+  tags: string
+}
 
 export function Products() {
+  const [projects, setProjects] = React.useState<Project[]>([])
+  const [isLoading, setIsLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch("/api/portfolio")
+        if (res.ok) {
+          const data = await res.json()
+          setProjects(data)
+        }
+      } catch (error) {
+        console.error("Failed to fetch projects:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchProjects()
+  }, [])
+
+  if (!isLoading && projects.length === 0) {
+    return null // Don't show the section if there are no projects
+  }
+
   return (
     <section id="products" className="section-padding bg-white relative overflow-hidden">
       <div className="container-custom">
