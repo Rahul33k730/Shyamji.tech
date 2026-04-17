@@ -77,12 +77,44 @@ async function main() {
     },
   ];
 
+  // Initial Projects (Portfolio)
+  const initialProjects = [
+    {
+      title: "AI Analysis Platform",
+      category: "AI & Machine Learning",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
+      description: "Enterprise-grade real-time data analysis platform using advanced neural networks for predictive modeling.",
+      tags: "AI, Machine Learning, Data Analytics",
+    },
+    {
+      title: "Modern SaaS Dashboard",
+      category: "Enterprise Software",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      description: "A highly performant, cloud-native dashboard designed for monitoring complex enterprise metrics and KPIs.",
+      tags: "SaaS, Dashboard, Cloud",
+    },
+    {
+      title: "Quantum E-Commerce",
+      category: "Web Applications",
+      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
+      description: "Next-generation shopping experience featuring serverless architecture and real-time inventory management.",
+      tags: "E-Commerce, Next.js, Serverless",
+    },
+  ];
+
   // Clear existing services to avoid duplicates
   await prisma.service.deleteMany({});
+  await prisma.project.deleteMany({});
 
   for (const service of initialServices) {
     await prisma.service.create({
       data: service,
+    });
+  }
+
+  for (const project of initialProjects) {
+    await prisma.project.create({
+      data: project,
     });
   }
 

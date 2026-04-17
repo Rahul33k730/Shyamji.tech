@@ -15,6 +15,33 @@ interface Project {
   tags: string
 }
 
+const fallbackProjects: Project[] = [
+  {
+    id: "fallback-1",
+    title: "AI Analysis Platform",
+    category: "AI & Machine Learning",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
+    description: "Enterprise-grade real-time data analysis platform using advanced neural networks for predictive modeling.",
+    tags: "AI, Machine Learning, Data Analytics",
+  },
+  {
+    id: "fallback-2",
+    title: "Modern SaaS Dashboard",
+    category: "Enterprise Software",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+    description: "A highly performant, cloud-native dashboard designed for monitoring complex enterprise metrics and KPIs.",
+    tags: "SaaS, Dashboard, Cloud",
+  },
+  {
+    id: "fallback-3",
+    title: "Quantum E-Commerce",
+    category: "Web Applications",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
+    description: "Next-generation shopping experience featuring serverless architecture and real-time inventory management.",
+    tags: "E-Commerce, Next.js, Serverless",
+  },
+];
+
 export function Products() {
   const [projects, setProjects] = React.useState<Project[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
@@ -25,20 +52,23 @@ export function Products() {
         const res = await fetch("/api/portfolio")
         if (res.ok) {
           const data = await res.json()
-          setProjects(data)
+          if (data && data.length > 0) {
+            setProjects(data)
+          } else {
+            setProjects(fallbackProjects)
+          }
+        } else {
+          setProjects(fallbackProjects)
         }
       } catch (error) {
         console.error("Failed to fetch projects:", error)
+        setProjects(fallbackProjects)
       } finally {
         setIsLoading(false)
       }
     }
     fetchProjects()
   }, [])
-
-  if (!isLoading && projects.length === 0) {
-    return null // Don't show the section if there are no projects
-  }
 
   return (
     <section id="products" className="section-padding bg-white relative overflow-hidden">
