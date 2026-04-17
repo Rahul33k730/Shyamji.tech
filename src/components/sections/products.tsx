@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "framer-motion"
 import { ExternalLink, Github, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const projects = [
   {
@@ -87,12 +88,12 @@ export function Products() {
             >
               <div className="h-full bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <div className="relative overflow-hidden aspect-video">
-                  <motion.img
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6 }}
+                  <Image
                     src={project.image}
                     alt={project.title}
-                    className="object-cover w-full h-full"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-[#1A56DB]/0 group-hover:bg-[#1A56DB]/5 transition-colors duration-300" />
                 </div>

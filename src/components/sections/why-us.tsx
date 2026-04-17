@@ -3,6 +3,7 @@
 import * as React from "react"
 import { motion } from "framer-motion"
 import { Shield, Zap, Layers, Users, CheckCircle } from "lucide-react"
+import Image from "next/image"
 
 const features = [
   {
@@ -100,10 +101,12 @@ export function WhyUs() {
             className="relative"
           >
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.2)] border-8 border-white/50 aspect-[4/5] lg:aspect-square">
-              <img 
+              <Image 
                 src="/image2.png" 
                 alt="Professional Office Team" 
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1A56DB]/20 to-transparent mix-blend-overlay" />
             </div>

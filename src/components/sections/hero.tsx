@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ArrowRight, CheckCircle2, Star, Users, Briefcase, Globe, Monitor, Smartphone, Cpu, Database, Layout, Sparkles } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { ParticleNetwork } from "@/components/ui/particle-network"
 
 function Counter({ target, suffix = "", delay = 0 }: { target: number, suffix?: string, delay?: number }) {
@@ -116,11 +117,14 @@ export function Hero() {
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#EFF6FF] rounded-full blur-[100px] -ml-[300px] -mb-[200px] opacity-40 z-0" />
       {/* Full-bleed hero background image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <img
+        <Image
           src={heroSrc}
           alt="Engineering Team Working"
-          className="w-full h-full object-cover object-[60%_50%]"
+          fill
+          className="object-cover object-[60%_50%]"
           onError={handleHeroError}
+          priority
+          sizes="100vw"
         />
         {/* Readability overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/30 to-transparent pointer-events-none" />
@@ -190,11 +194,13 @@ export function Hero() {
             {/* Main Image Container (edge-to-edge like your reference) */}
             <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.25)]">
               <div className="relative overflow-hidden aspect-[16/10] lg:aspect-[16/9]">
-                <img
+                <Image
                   src={heroSrc}
                   alt="Engineering Team Working"
-                  className="w-full h-full object-cover object-[60%_50%]"
+                  fill
+                  className="object-cover object-[60%_50%]"
                   onError={handleHeroError}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/40 to-transparent pointer-events-none" />
                 <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-white/65 to-transparent pointer-events-none" />
