@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   title: "Shyamji Tech | Building the Future of Intelligent Technology",
   description: "A premium AI and software technology company delivering cutting-edge solutions for global enterprises.",
   icons: {
-    icon: "/logo1.png",
-    apple: "/logo1.png",
-    shortcut: "/logo1.png",
+    icon: "/logo3.jpeg",
+    apple: "/logo3.jpeg",
+    shortcut: "/logo3.jpeg",
   },
 };
 
