@@ -93,7 +93,7 @@ export function Hero() {
     () => [
       "/image1.png",
       "/image3.png",
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=1200&fit=crop",
+      "/image4.png",
     ],
     []
   )
