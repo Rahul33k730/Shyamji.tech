@@ -125,14 +125,14 @@ export function Hero() {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#EFF6FF] rounded-full blur-[120px] -mr-[400px] -mt-[200px] opacity-60 z-0" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#EFF6FF] rounded-full blur-[100px] -ml-[300px] -mb-[200px] opacity-40 z-0" />
       {/* Full-bleed hero background image */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatePresence mode="wait">
+      <div className="absolute inset-0 z-0 overflow-hidden bg-slate-900">
+        <AnimatePresence>
           <motion.div
             key={heroSrc}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: "easeOut" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
             className="absolute inset-0"
           >
             <Image
@@ -247,15 +247,15 @@ export function Hero() {
             className="relative hidden"
           >
             {/* Main Image Container (edge-to-edge like your reference) */}
-            <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.25)]">
+            <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.25)] bg-slate-900">
               <div className="relative overflow-hidden aspect-[16/10] lg:aspect-[16/9]">
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                   <motion.div
                     key={heroSrc}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1.5 }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
                     className="absolute inset-0"
                   >
                     <Image
