@@ -2,9 +2,10 @@
 
 import * as React from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, CheckCircle2, Star, Users, Briefcase, Globe, Monitor, Smartphone, Cpu, Database, Layout, Sparkles } from "lucide-react"
+import { ArrowRight, CheckCircle2, Star, Users, Briefcase, Globe, Monitor, Smartphone, Cpu, Database, Layout, Sparkles, ChevronLeft, ArrowLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 import { ParticleNetwork } from "@/components/ui/particle-network"
 
 function Counter({ target, suffix = "", delay = 0 }: { target: number, suffix?: string, delay?: number }) {
@@ -102,9 +103,12 @@ export function Hero() {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setHeroSrcIndex((prev) => (prev + 1) % heroCandidates.length)
-    }, 6000) // Change image every 6 seconds
+    }, 8000) // Increased to 8 seconds for longer "time life"
     return () => clearInterval(interval)
   }, [heroCandidates.length])
+
+  const nextSlide = () => setHeroSrcIndex((prev) => (prev + 1) % heroCandidates.length);
+  const prevSlide = () => setHeroSrcIndex((prev) => (prev - 1 + heroCandidates.length) % heroCandidates.length);
 
   const handleHeroError = React.useCallback(() => {
     // If an image fails to load, move to the next one immediately
@@ -125,17 +129,18 @@ export function Hero() {
         <AnimatePresence mode="wait">
           <motion.div
             key={heroSrc}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5 }}
+            transition={{ duration: 2, ease: "easeOut" }}
             className="absolute inset-0"
           >
             <Image
               src={heroSrc}
               alt="Engineering Team Working"
               fill
-              className="object-cover object-[80%_50%]"
+              className="object-cover object-[80%_50%] transition-transform duration-[8000ms] ease-linear scale-105"
+              style={{ transform: "scale(1.15)" }}
               onError={handleHeroError}
               priority
               sizes="100vw"
@@ -145,6 +150,40 @@ export function Hero() {
         {/* Readability overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/30 to-transparent pointer-events-none" />
         <div className="absolute left-0 top-0 h-full w-[42%] bg-gradient-to-r from-white/85 to-transparent pointer-events-none" />
+        
+        {/* Navigation Controls */}
+        <div className="absolute inset-x-0 bottom-10 z-20 flex flex-col items-center gap-6 pointer-events-none">
+          {/* Dot Indicators */}
+          <div className="flex gap-3 pointer-events-auto">
+            {heroCandidates.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setHeroSrcIndex(i)}
+                className={cn(
+                  "h-1.5 transition-all duration-500 rounded-full",
+                  heroSrcIndex === i ? "w-8 bg-[#1A56DB]" : "w-2 bg-slate-300 hover:bg-slate-400"
+                )}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+          
+          {/* Arrow Buttons */}
+          <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 inset-x-8 justify-between w-[calc(100%-64px)]">
+            <button 
+              onClick={prevSlide}
+              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto group active:scale-95"
+            >
+              <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto group active:scale-95"
+            >
+              <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="container-custom relative z-10">
