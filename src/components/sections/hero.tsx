@@ -92,6 +92,7 @@ export function Hero() {
   const heroCandidates = React.useMemo(
     () => [
       "/image1.png",
+      "/image2.png",
       "/image3.png",
       "/image4.png",
     ],
@@ -148,8 +149,8 @@ export function Hero() {
           </motion.div>
         </AnimatePresence>
         {/* Readability overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/30 to-transparent pointer-events-none" />
-        <div className="absolute left-0 top-0 h-full w-[42%] bg-gradient-to-r from-white/85 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/40 to-transparent pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-[60%] bg-gradient-to-r from-white/95 via-white/80 to-transparent pointer-events-none backdrop-blur-[2px]" />
         
         {/* Navigation Controls */}
         <div className="absolute inset-x-0 bottom-10 z-20 flex flex-col items-center gap-6 pointer-events-none">
@@ -202,7 +203,7 @@ export function Hero() {
               Building the Future of <RotatingText />
             </h1>
             
-            <p className="text-slate-700 text-lg lg:text-xl leading-relaxed mb-12 max-w-xl font-medium">
+            <p className="text-slate-900 text-lg lg:text-xl leading-relaxed mb-12 max-w-xl font-semibold drop-shadow-sm">
               We engineer high-performance digital infrastructure for the next generation of startups. From AI-driven automation to scalable enterprise platforms.
             </p>
             
@@ -268,8 +269,8 @@ export function Hero() {
                     />
                   </motion.div>
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/40 to-transparent pointer-events-none" />
-                <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-white/65 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/50 to-transparent pointer-events-none" />
+                <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-white/90 via-white/70 to-transparent pointer-events-none backdrop-blur-[2px]" />
               </div>
             </div>
             
