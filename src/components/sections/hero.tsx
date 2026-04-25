@@ -121,7 +121,7 @@ export function Hero() {
           src={heroSrc}
           alt="Engineering Team Working"
           fill
-          className="object-cover object-[60%_50%]"
+          className="object-cover object-[80%_50%]"
           onError={handleHeroError}
           priority
           sizes="100vw"
@@ -198,7 +198,7 @@ export function Hero() {
                   src={heroSrc}
                   alt="Engineering Team Working"
                   fill
-                  className="object-cover object-[60%_50%]"
+                  className="object-cover object-[80%_50%]"
                   onError={handleHeroError}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
