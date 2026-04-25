@@ -91,21 +91,26 @@ export function Hero() {
   const heroCandidates = React.useMemo(
     () => [
       "/image1.png",
-      "/image1.jpg",
-      "/image%201.png",
-      "/image 1.png",
-      "/hero.jpg",
-      "/hero.png",
-      "/hero.jpeg",
-      "/hero.webp",
+      "/image3.png",
       "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=1200&fit=crop",
     ],
     []
   )
   const [heroSrcIndex, setHeroSrcIndex] = React.useState(0)
-  const handleHeroError = React.useCallback(() => {
-    setHeroSrcIndex((i) => (i + 1 < heroCandidates.length ? i + 1 : i))
+  
+  // Auto-rotate hero images
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroSrcIndex((prev) => (prev + 1) % heroCandidates.length)
+    }, 6000) // Change image every 6 seconds
+    return () => clearInterval(interval)
   }, [heroCandidates.length])
+
+  const handleHeroError = React.useCallback(() => {
+    // If an image fails to load, move to the next one immediately
+    setHeroSrcIndex((i) => (i + 1) % heroCandidates.length)
+  }, [heroCandidates.length])
+  
   const heroSrc = heroCandidates[heroSrcIndex]
 
   return (
@@ -117,15 +122,26 @@ export function Hero() {
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#EFF6FF] rounded-full blur-[100px] -ml-[300px] -mb-[200px] opacity-40 z-0" />
       {/* Full-bleed hero background image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <Image
-          src={heroSrc}
-          alt="Engineering Team Working"
-          fill
-          className="object-cover object-[80%_50%]"
-          onError={handleHeroError}
-          priority
-          sizes="100vw"
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={heroSrc}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={heroSrc}
+              alt="Engineering Team Working"
+              fill
+              className="object-cover object-[80%_50%]"
+              onError={handleHeroError}
+              priority
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
         {/* Readability overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/30 to-transparent pointer-events-none" />
         <div className="absolute left-0 top-0 h-full w-[42%] bg-gradient-to-r from-white/85 to-transparent pointer-events-none" />
@@ -194,14 +210,25 @@ export function Hero() {
             {/* Main Image Container (edge-to-edge like your reference) */}
             <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.25)]">
               <div className="relative overflow-hidden aspect-[16/10] lg:aspect-[16/9]">
-                <Image
-                  src={heroSrc}
-                  alt="Engineering Team Working"
-                  fill
-                  className="object-cover object-[80%_50%]"
-                  onError={handleHeroError}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={heroSrc}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.5 }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={heroSrc}
+                      alt="Engineering Team Working"
+                      fill
+                      className="object-cover object-[80%_50%]"
+                      onError={handleHeroError}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/40 to-transparent pointer-events-none" />
                 <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-white/65 to-transparent pointer-events-none" />
               </div>
