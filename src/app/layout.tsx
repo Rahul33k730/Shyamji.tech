@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     shortcut: "/logo3.jpeg",
   },
   verification: {
-    google: "IYJEKqM2I04tasd...",
+    google: "IYJEKqM2l04tasdFIxPkzpN-_Q1Eh7Ya020vBSkdWeY",
   },
 };
 
