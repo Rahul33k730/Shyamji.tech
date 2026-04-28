@@ -18,24 +18,31 @@ interface PricingPlan {
 
 const fallbackPlans = [
   {
-    name: "Starter",
-    price: "₹24,999",
-    description: "Perfect for early-stage startups and small projects.",
-    features: JSON.stringify(["Single Platform (Web or Mobile)", "Standard UI/UX Design", "Core Features Implementation", "30 Days Support", "Cloud Deployment"]),
+    name: "Custom Web Development",
+    price: "₹35,000",
+    description: "High-performance custom websites built with modern technologies like React and Next.js.",
+    features: JSON.stringify(["Modern UI/UX Design", "Responsive Layouts", "SEO Optimized", "Next.js & React", "Secure Deployment"]),
     popular: false
   },
   {
-    name: "Professional",
-    price: "₹74,999",
-    description: "Comprehensive solution for growing businesses.",
-    features: JSON.stringify(["Full-Stack Application", "Premium AI Integration", "Advanced Dashboard", "Priority Support", "Scalable Infrastructure", "SEO & Performance Optimization"]),
+    name: "AI Automation Solutions",
+    price: "₹40,000",
+    description: "Automate your business workflows with intelligent AI-driven automation systems.",
+    features: JSON.stringify(["Workflow Analysis", "Custom AI Integration", "Process Automation", "Efficiency Reporting", "Continuous Optimization"]),
     popular: true
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    description: "High-performance systems for large-scale organizations.",
-    features: JSON.stringify(["Complex Multi-Platform Systems", "Custom AI/ML Models", "24/7 Dedicated Support", "Enterprise-Grade Security", "Internal Tooling", "Legacy System Integration"]),
+    name: "Mobile App Development",
+    price: "₹60,000",
+    description: "Native and cross-platform mobile applications designed for seamless user experiences.",
+    features: JSON.stringify(["iOS & Android Apps", "Flutter/React Native", "Offline Functionality", "App Store Publishing", "Push Notifications"]),
+    popular: false
+  },
+  {
+    name: "AI Model Training",
+    price: "₹100,000",
+    description: "Customized AI training services tailored to your specific industry needs.",
+    features: JSON.stringify(["Data Processing", "Model Architecture", "Performance Tuning", "Scalable Inference", "API Integration"]),
     popular: false
   }
 ]
@@ -86,7 +93,7 @@ export function Pricing() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
           {plans.map((plan, i) => {
             let features: string[] = [];
             try {

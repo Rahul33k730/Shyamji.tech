@@ -102,9 +102,46 @@ async function main() {
     },
   ];
 
+  // Initial Pricing Plans
+  const initialPricingPlans = [
+    {
+      name: "Custom Web Development",
+      price: "₹35,000",
+      description: "High-performance custom websites built with modern technologies like React and Next.js.",
+      features: JSON.stringify(["Modern UI/UX Design", "Responsive Layouts", "SEO Optimized", "Next.js & React", "Secure Deployment"]),
+      popular: false,
+      order: 0
+    },
+    {
+      name: "AI Automation Solutions",
+      price: "₹40,000",
+      description: "Automate your business workflows with intelligent AI-driven automation systems.",
+      features: JSON.stringify(["Workflow Analysis", "Custom AI Integration", "Process Automation", "Efficiency Reporting", "Continuous Optimization"]),
+      popular: true,
+      order: 1
+    },
+    {
+      name: "Mobile App Development",
+      price: "₹60,000",
+      description: "Native and cross-platform mobile applications designed for seamless user experiences.",
+      features: JSON.stringify(["iOS & Android Apps", "Flutter/React Native", "Offline Functionality", "App Store Publishing", "Push Notifications"]),
+      popular: false,
+      order: 2
+    },
+    {
+      name: "AI Model Training",
+      price: "₹100,000",
+      description: "Customized AI training services tailored to your specific industry needs.",
+      features: JSON.stringify(["Data Processing", "Model Architecture", "Performance Tuning", "Scalable Inference", "API Integration"]),
+      popular: false,
+      order: 3
+    }
+  ];
+
   // Clear existing services to avoid duplicates
   await prisma.service.deleteMany({});
   await prisma.project.deleteMany({});
+  await prisma.pricingPlan.deleteMany({});
 
   for (const service of initialServices) {
     await prisma.service.create({
@@ -115,6 +152,12 @@ async function main() {
   for (const project of initialProjects) {
     await prisma.project.create({
       data: project,
+    });
+  }
+
+  for (const plan of initialPricingPlans) {
+    await prisma.pricingPlan.create({
+      data: plan,
     });
   }
 
