@@ -68,10 +68,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // While checking auth, show a loading state
   if (isAuthenticated === null) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+      <div className="min-h-screen bg-[#F9FAFB] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
-          <p className="text-gray-400 font-medium">Verifying Session...</p>
+          <div className="w-12 h-12 border-4 border-blue-500/10 border-t-blue-600 rounded-full animate-spin" />
+          <p className="text-gray-500 font-medium">Verifying Session...</p>
         </div>
       </div>
     );
@@ -91,31 +91,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex overflow-hidden">
+    <div className="min-h-screen bg-[#F9FAFB] text-[#111827] flex overflow-hidden">
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 bg-[#0f0f0f] border-r border-white/5 transform transition-transform duration-300 lg:relative lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 lg:relative lg:translate-x-0 shadow-sm",
           !isSidebarOpen && "-translate-x-full"
         )}
       >
         <div className="h-full flex flex-col p-6">
           <div className="mb-10">
             <Link href="/admin" className="flex items-center group">
-              <Logo size="sm" className="[&_span]:text-white" />
+              <Logo size="sm" className="[&_span]:text-[#111827]" />
             </Link>
           </div>
 
           <nav className="flex-1 space-y-1.5">
             <Link
               href="/"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-blue-400 hover:text-white hover:bg-blue-500/10 transition-all mb-4 border border-blue-500/10"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-blue-600 hover:bg-blue-50 transition-all mb-4 border border-blue-100 bg-blue-50/50"
             >
               <Globe className="w-5 h-5" />
               Visit Website
             </Link>
 
-            <div className="text-[10px] font-black text-gray-600 uppercase tracking-[2px] mb-4 ml-4">
+            <div className="text-[10px] font-black text-gray-400 uppercase tracking-[2px] mb-4 ml-4">
               Management
             </div>
 
@@ -129,10 +129,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group",
                     isActive 
                       ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20" 
-                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                      : "text-gray-500 hover:text-blue-600 hover:bg-blue-50"
                   )}
                 >
-                  <link.icon className={cn("w-5 h-5", isActive ? "text-white" : "text-gray-400 group-hover:text-white")} />
+                  <link.icon className={cn("w-5 h-5", isActive ? "text-white" : "text-gray-400 group-hover:text-blue-600")} />
                   {link.name}
                 </Link>
               );
@@ -141,7 +141,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-400/10 transition-all mt-auto"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-all mt-auto"
           >
             <LogOut className="w-5 h-5" />
             Logout
@@ -152,21 +152,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-h-screen relative">
         {/* Topbar */}
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-6 bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-30">
+        <header className="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white/80 backdrop-blur-md sticky top-0 z-30">
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded-lg hover:bg-white/5 lg:hidden text-white"
+            className="p-2 rounded-lg hover:bg-gray-100 lg:hidden text-gray-600"
           >
             {isSidebarOpen ? <X /> : <Menu />}
           </button>
           
           <div className="flex items-center gap-4 ml-auto">
             <div className="hidden sm:flex flex-col items-end">
-              <span className="text-[10px] font-black tracking-[2px] text-blue-500 uppercase">Secure Access</span>
-              <span className="text-sm font-semibold text-white">System Administrator</span>
+              <span className="text-[10px] font-black tracking-[2px] text-blue-600 uppercase">Secure Access</span>
+              <span className="text-sm font-semibold text-[#111827]">System Administrator</span>
             </div>
-            <div className="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/20 flex items-center justify-center">
-              <Users className="w-5 h-5 text-blue-400" />
+            <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+              <Users className="w-5 h-5 text-blue-600" />
             </div>
           </div>
         </header>

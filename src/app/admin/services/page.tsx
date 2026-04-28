@@ -131,10 +131,10 @@ export default function ServicesManagement() {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black tracking-tight">Services Management</h1>
-          <p className="text-gray-400 mt-1">Manage the services offered on your website.</p>
+          <h1 className="text-3xl font-black tracking-tight text-[#111827]">Services Management</h1>
+          <p className="text-gray-500 mt-1">Manage the services offered on your website.</p>
         </div>
-        <Button onClick={() => { setCurrentService({}); setIsModalOpen(true); }} className="flex items-center gap-2">
+        <Button onClick={() => { setCurrentService({}); setIsModalOpen(true); }} className="flex items-center gap-2 bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all active:scale-95">
           <Plus className="w-4 h-4" /> Add New Service
         </Button>
       </div>
@@ -143,11 +143,11 @@ export default function ServicesManagement() {
         {isLoading && services.length === 0 ? (
           [...Array(3)].map((_, i) => (
             <div key={i} className="animate-pulse">
-              <Card variant="glass" padding="lg" className="h-48 bg-white/5 border-white/5" />
+              <Card variant="glass" padding="lg" className="h-48 bg-white border-gray-100 shadow-sm" />
             </div>
           ))
         ) : services.length === 0 ? (
-          <div className="col-span-full py-20 text-center text-gray-500">
+          <div className="col-span-full py-20 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">
             No services found. Add your first service above.
           </div>
         ) : (
@@ -158,41 +158,41 @@ export default function ServicesManagement() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <Card variant="glass" padding="lg" className="border-white/5 group hover:border-blue-500/20 transition-all h-full relative">
+              <Card variant="glass" padding="lg" className="bg-white border-gray-200 group hover:border-blue-500/20 transition-all h-full relative shadow-sm">
                 <div className="absolute top-4 right-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button 
                     onClick={() => { setCurrentService(service); setIsModalOpen(true); }}
-                    className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-white transition-colors"
+                    className="p-2 rounded-lg bg-gray-50 text-gray-400 hover:text-blue-600 transition-colors"
                   >
                     <Edit3 className="w-4 h-4" />
                   </button>
                   <button 
                     onClick={() => handleDelete(service.id)}
-                    className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-red-400 transition-colors"
+                    className="p-2 rounded-lg bg-gray-50 text-gray-400 hover:text-red-600 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
 
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400">
+                  <div className="p-3 rounded-xl bg-blue-50 text-blue-600">
                     {getIconComponent(service.icon)}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold tracking-tight">{service.name}</h3>
-                    <p className="text-xs text-blue-400 font-bold uppercase tracking-widest">{service.category}</p>
+                    <h3 className="text-lg font-bold tracking-tight text-[#111827]">{service.name}</h3>
+                    <p className="text-xs text-blue-600 font-bold uppercase tracking-widest">{service.category}</p>
                   </div>
                 </div>
 
-                <p className="text-xs text-gray-400 leading-relaxed mb-6 h-12 overflow-hidden line-clamp-3">
+                <p className="text-xs text-gray-500 leading-relaxed mb-6 h-12 overflow-hidden line-clamp-3">
                   {service.description}
                 </p>
 
-                <div className="flex items-center justify-between pt-6 border-t border-white/5 mt-auto">
-                  <span className="text-xl font-black text-white">{service.price}</span>
+                <div className="flex items-center justify-between pt-6 border-t border-gray-100 mt-auto">
+                  <span className="text-xl font-black text-[#111827]">{service.price}</span>
                   <div className={cn(
                     "flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider",
-                    service.status === "active" ? "bg-emerald-400/10 text-emerald-400" : "bg-red-400/10 text-red-400"
+                    service.status === "active" ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"
                   )}>
                     {service.status === "active" ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
                     {service.status}
@@ -207,19 +207,19 @@ export default function ServicesManagement() {
       {/* Service Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/50 backdrop-blur-sm overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="w-full max-w-xl"
+              className="w-full max-w-xl my-auto"
             >
-              <Card variant="glass" padding="lg" className="border-white/10 shadow-2xl">
+              <Card variant="glass" padding="lg" className="bg-white border-gray-200 shadow-2xl">
                 <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-2xl font-black tracking-tight">
+                  <h2 className="text-2xl font-black tracking-tight text-[#111827]">
                     {currentService.id ? "Edit Service" : "Add New Service"}
                   </h2>
-                  <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-full hover:bg-white/5">
+                  <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-full hover:bg-gray-100">
                     <X className="w-6 h-6 text-gray-400" />
                   </button>
                 </div>
@@ -227,24 +227,24 @@ export default function ServicesManagement() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Service Name</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Service Name</label>
                       <input
                         type="text"
                         value={currentService.name}
                         onChange={(e) => setCurrentService({...currentService, name: e.target.value})}
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500/50 text-[#111827] outline-none transition-all"
                         placeholder="e.g. AI Solutions"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Price</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Price</label>
                       <input
                         type="text"
                         value={currentService.price}
                         onChange={(e) => setCurrentService({...currentService, price: e.target.value})}
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500/50 text-[#111827] outline-none transition-all"
                         placeholder="e.g. $9,999"
                       />
                     </div>
@@ -252,22 +252,22 @@ export default function ServicesManagement() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Category</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Category</label>
                       <input
                         type="text"
                         value={currentService.category}
                         onChange={(e) => setCurrentService({...currentService, category: e.target.value})}
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500/50 text-[#111827] outline-none transition-all"
                         placeholder="e.g. AI & ML"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Status</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Status</label>
                       <select
                         value={currentService.status}
                         onChange={(e) => setCurrentService({...currentService, status: e.target.value})}
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all appearance-none"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500/50 text-[#111827] outline-none transition-all appearance-none"
                       >
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
@@ -276,19 +276,19 @@ export default function ServicesManagement() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Description</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Description</label>
                     <textarea
                       value={currentService.description}
                       onChange={(e) => setCurrentService({...currentService, description: e.target.value})}
                       required
                       rows={3}
-                      className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 focus:border-blue-500/50 text-white outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500/50 text-[#111827] outline-none transition-all resize-none"
                       placeholder="Describe the service..."
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Icon</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Icon</label>
                     <div className="flex flex-wrap gap-4">
                       {icons.map((item) => (
                         <button
@@ -299,7 +299,7 @@ export default function ServicesManagement() {
                             "p-3 rounded-xl border transition-all",
                             currentService.icon === item.name 
                               ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-600/20" 
-                              : "bg-white/5 border-white/5 text-gray-400 hover:border-white/20"
+                              : "bg-gray-50 border-gray-100 text-gray-400 hover:border-blue-500/20"
                           )}
                         >
                           <item.icon className="w-6 h-6" />
@@ -313,17 +313,17 @@ export default function ServicesManagement() {
                       type="button"
                       variant="outline"
                       onClick={() => setIsModalOpen(false)}
-                      className="flex-1"
+                      className="flex-1 border-gray-200 text-gray-600 hover:bg-gray-50"
                     >
                       Cancel
                     </Button>
                     <Button
                       type="submit"
-                      className="flex-1 bg-white text-black hover:bg-white/90"
+                      className="flex-1 bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/20"
                       disabled={isLoading}
                     >
                       {isLoading ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <Loader2 className="w-5 h-5 animate-spin border-t-white" />
                       ) : (
                         <>
                           <Save className="w-4 h-4 mr-2" /> {currentService.id ? "Update" : "Create"} Service
@@ -342,5 +342,5 @@ export default function ServicesManagement() {
 }
 
 function Loader2({ className }: { className?: string }) {
-  return <div className={cn("w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin", className)} />;
+  return <div className={cn("w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin", className)} />;
 }

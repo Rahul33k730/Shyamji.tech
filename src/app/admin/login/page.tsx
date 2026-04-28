@@ -41,9 +41,9 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0a] text-white font-sans relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#F9FAFB] text-[#111827] font-sans relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] -mr-[300px] -mt-[200px]" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] -mr-[300px] -mt-[200px]" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[100px] -ml-[250px] -mb-[150px]" />
 
       {/* Brand Header */}
@@ -52,7 +52,7 @@ export default function AdminLogin() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-12 relative z-10"
       >
-        <Logo size="lg" className="[&_span]:text-white" />
+        <Logo size="lg" className="[&_span]:text-[#111827]" />
       </motion.div>
 
       <motion.div
@@ -60,7 +60,7 @@ export default function AdminLogin() {
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-[440px] px-6 relative z-10"
       >
-        <div className="bg-[#111111] border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
+        <div className="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
           {/* Card Header */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
             <h2 className="text-white font-black text-lg uppercase tracking-widest text-center">
@@ -92,12 +92,12 @@ export default function AdminLogin() {
 
               {/* Email Field */}
               <div className="space-y-1.5">
-                <label className="text-[13px] font-bold text-[#666] flex items-center gap-2 uppercase tracking-wide">
+                <label className="text-[13px] font-bold text-gray-500 flex items-center gap-2 uppercase tracking-wide">
                   Email address:
                 </label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Mail className="h-4 w-4 text-[#999] group-focus-within:text-[#1A56DB] transition-colors" />
+                    <Mail className="h-4 w-4 text-gray-400 group-focus-within:text-[#1A56DB] transition-colors" />
                   </div>
                   <input
                     type="email"
@@ -105,7 +105,7 @@ export default function AdminLogin() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     autoFocus
-                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm text-[#111827] placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
+                    className="block w-full pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-[#111827] placeholder-gray-400 focus:outline-none focus:border-[#1A56DB] focus:ring-4 focus:ring-[#1A56DB]/10 transition-all"
                     placeholder="admin@shyamji.tech"
                   />
                 </div>
@@ -114,20 +114,20 @@ export default function AdminLogin() {
               {/* Password Field */}
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center">
-                  <label className="text-[13px] font-bold text-[#666] flex items-center gap-2 uppercase tracking-wide">
+                  <label className="text-[13px] font-bold text-gray-500 flex items-center gap-2 uppercase tracking-wide">
                     Password:
                   </label>
                 </div>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-[#999] group-focus-within:text-[#1A56DB] transition-colors" />
+                    <Lock className="h-4 w-4 text-gray-400 group-focus-within:text-[#1A56DB] transition-colors" />
                   </div>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="block w-full pl-10 pr-3 py-2.5 bg-white border border-[#ccc] rounded text-sm text-[#111827] placeholder-[#999] focus:outline-none focus:border-[#1A56DB] focus:ring-1 focus:ring-[#1A56DB]/20 transition-all"
+                    className="block w-full pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-[#111827] placeholder-gray-400 focus:outline-none focus:border-[#1A56DB] focus:ring-4 focus:ring-[#1A56DB]/10 transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -138,7 +138,7 @@ export default function AdminLogin() {
                 type="submit"
                 disabled={isLoading}
                 className={cn(
-                  "w-full py-2.5 px-4 bg-[#1A56DB] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-[0.1em] rounded shadow-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed",
+                  "w-full py-3 px-4 bg-[#1A56DB] hover:bg-[#1E3A8A] text-white text-xs font-black uppercase tracking-[0.2em] rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed",
                   isLoading && "cursor-wait"
                 )}
               >
@@ -148,7 +148,7 @@ export default function AdminLogin() {
                     Authenticating...
                   </>
                 ) : (
-                  "Log in"
+                  "Log in Securely"
                 )}
               </button>
             </form>
@@ -157,7 +157,7 @@ export default function AdminLogin() {
 
         {/* Support Links */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-[#999] font-medium">
+          <p className="text-xs text-gray-400 font-medium">
             &copy; {new Date().getFullYear()} Shyamji Tech. Secure Administration.
           </p>
         </div>
