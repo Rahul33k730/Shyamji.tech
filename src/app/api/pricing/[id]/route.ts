@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+interface RouteContext {
+  params: {
+    id: string;
+  };
+}
+
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
   try {
+    const { id } = context.params;
     const data = await request.json();
     const plan = await prisma.pricingPlan.update({
-      where: { id: params.id },
+      where: { id: id },
       data,
     });
     return NextResponse.json(plan);
@@ -19,11 +26,12 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
   try {
+    const { id } = context.params;
     await prisma.pricingPlan.delete({
-      where: { id: params.id },
+      where: { id: id },
     });
     return NextResponse.json({ message: "Deleted successfully" });
   } catch (error) {
