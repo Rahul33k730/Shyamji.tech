@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 interface RouteContext {
@@ -8,7 +8,7 @@ interface RouteContext {
 }
 
 export async function PUT(
-  request: Request,
+  request: NextRequest,
   context: RouteContext
 ) {
   try {
@@ -25,7 +25,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
+  request: NextRequest,
   context: RouteContext
 ) {
   try {
