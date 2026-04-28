@@ -25,6 +25,7 @@ import { Logo } from "@/components/ui/logo";
 const sidebarLinks = [
   { name: "Overview", href: "/admin", icon: LayoutDashboard },
   { name: "Services", href: "/admin/services", icon: Briefcase },
+  { name: "Pricing", href: "/admin/pricing", icon: Cpu },
   { name: "Portfolio", href: "/admin/portfolio", icon: FolderKanban },
   { name: "Testimonials", href: "/admin/testimonials", icon: MessageSquare },
   { name: "Leads", href: "/admin/leads", icon: Users },
