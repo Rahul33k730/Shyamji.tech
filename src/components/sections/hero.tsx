@@ -140,11 +140,11 @@ export function Hero() {
               src={heroSrc}
               alt="Engineering Team Working"
               fill
-              className="object-cover object-[80%_50%] transition-transform duration-[8000ms] ease-linear scale-105"
-              style={{ transform: "scale(1.15)" }}
+              className="object-cover object-center"
               onError={handleHeroError}
               priority
               sizes="100vw"
+              quality={90}
             />
           </motion.div>
         </AnimatePresence>
@@ -263,9 +263,11 @@ export function Hero() {
                       src={heroSrc}
                       alt="Engineering Team Working"
                       fill
-                      className="object-cover object-[80%_50%]"
+                      className="object-cover object-center"
                       onError={handleHeroError}
+                      priority
                       sizes="(max-width: 1024px) 100vw, 50vw"
+                      quality={90}
                     />
                   </motion.div>
                 </AnimatePresence>
