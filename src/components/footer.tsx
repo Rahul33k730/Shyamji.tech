@@ -23,7 +23,7 @@ export function Footer() {
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all shadow-sm active:scale-95"><Linkedin className="w-5 h-5" /></a>
               <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all shadow-sm active:scale-95"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all shadow-sm active:scale-95"><Instagram className="w-5 h-5" /></a>
+              <a href="https://www.instagram.com/shyamjitech_official/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all shadow-sm active:scale-95"><Instagram className="w-5 h-5" /></a>
               <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all shadow-sm active:scale-95"><Github className="w-5 h-5" /></a>
             </div>
           </div>

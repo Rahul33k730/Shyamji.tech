@@ -102,11 +102,13 @@ export default function ContactPage() {
                     {[
                       { icon: Linkedin, href: "#" },
                       { icon: Twitter, href: "#" },
-                      { icon: Instagram, href: "#" }
+                      { icon: Instagram, href: "https://www.instagram.com/shyamjitech_official/" }
                     ].map((social, i) => (
                       <a 
                         key={i} 
                         href={social.href}
+                        target={social.href !== "#" ? "_blank" : undefined}
+                        rel={social.href !== "#" ? "noopener noreferrer" : undefined}
                         className="w-12 h-12 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#1A56DB] hover:bg-[#1A56DB] hover:text-white transition-all shadow-sm active:scale-95"
                       >
                         <social.icon className="w-6 h-6" />
