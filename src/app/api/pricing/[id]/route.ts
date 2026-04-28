@@ -1,18 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-
 export async function PUT(
   request: NextRequest,
-  context: RouteContext
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = params;
     const data = await request.json();
     const plan = await prisma.pricingPlan.update({
       where: { id: id },
@@ -26,10 +20,10 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  context: RouteContext
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = params;
     await prisma.pricingPlan.delete({
       where: { id: id },
     });
